@@ -1,0 +1,430 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #e8d7d7;
+    background: linear-gradient(135deg, #2a0f1a 0%, #1a0a12 100%);
+    min-height: 100vh;
+}
+
+/* Шапка */
+header {
+    background: linear-gradient(135deg, #3d1829 0%, #2a0f1a 100%);
+    color: #ffd6e8;
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 20px rgba(190, 104, 147, 0.2);
+    border-bottom: 1px solid #ff66a3;
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 1.5rem;
+}
+
+nav ul li a {
+    color: #ffb6d5;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+nav ul li a:hover {
+    color: #ff66a3;
+    background: rgba(255, 102, 163, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Основной контент */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+h2 {
+    color: #ffb6d5;
+    border-bottom: 2px solid #ff66a3;
+    padding-bottom: 0.7rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Сетка лекций */
+.lectures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.lecture-card {
+    background: linear-gradient(145deg, #3d1829 0%, #2d1120 100%);
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(190, 104, 147, 0.15);
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #4a1e33;
+    position: relative;
+    overflow: hidden;
+}
+
+.lecture-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff66a3, #ffb6d5);
+}
+
+.lecture-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(255, 102, 163, 0.25);
+    border-color: #ff66a3;
+}
+
+.lecture-card h3 {
+    color: #ffd6e8;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.lecture-card p {
+    margin-bottom: 1.5rem;
+    color: #e8b8cf;
+    line-height: 1.7;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%);
+    color: #2a0f1a;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #ff8ebb 0%, #ff66a3 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #b86b9a 0%, #d48fb8 100%);
+    box-shadow: 0 4px 15px rgba(184, 107, 154, 0.3);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #d48fb8 0%, #b86b9a 100%);
+    box-shadow: 0 6px 20px rgba(184, 107, 154, 0.4);
+}
+
+/* Подвал */
+footer {
+    background: linear-gradient(135deg, #2a0f1a 0%, #1a0a12 100%);
+    color: #ffb6d5;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    border-top: 1px solid #ff66a3;
+}
+
+/* Стили для страниц лекций */
+.lecture-content {
+    background: linear-gradient(145deg, #3d1829 0%, #2d1120 100%);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(190, 104, 147, 0.15);
+    border: 1px solid #4a1e33;
+    position: relative;
+}
+
+.lecture-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff66a3, #ffb6d5, #ff66a3);
+    border-radius: 16px 16px 0 0;
+}
+
+.lecture-title {
+    color: #ffd6e8;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #ff66a3;
+    padding-bottom: 0.8rem;
+    font-weight: 300;
+}
+
+.lecture-section {
+    margin-bottom: 2.5rem;
+}
+
+.lecture-section h3 {
+    color: #ff8ebb;
+    margin-bottom: 1.2rem;
+    font-weight: 400;
+    border-left: 3px solid #ff66a3;
+    padding-left: 1rem;
+}
+
+.lecture-section p {
+    margin-bottom: 1.2rem;
+    color: #e8b8cf;
+    line-height: 1.7;
+}
+
+.lecture-section ul, .lecture-section ol {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.questions-list {
+    list-style: none;
+    margin-left: 0;
+}
+
+.question-item {
+    background: linear-gradient(145deg, #4a1e33 0%, #3a1527 100%);
+    border-left: 4px solid #ff66a3;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.2);
+}
+
+.question-text {
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #ffd6e8;
+}
+
+.answer-text {
+    color: #e8b8cf;
+    line-height: 1.6;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    color: #ff8ebb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.back-link:hover {
+    color: #ff66a3;
+    background: rgba(255, 102, 163, 0.1);
+    text-decoration: none;
+    transform: translateX(-5px);
+}
+
+/* Дополнительные стили для улучшения внешнего вида */
+
+/* Стили для таблиц в ответах на вопросы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid #4a1e33;
+    padding: 14px;
+    text-align: left;
+}
+
+th {
+    background: linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%);
+    color: #2a0f1a;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(74, 30, 51, 0.3);
+}
+
+tr:hover {
+    background-color: rgba(255, 102, 163, 0.1);
+}
+
+/* Стили для списков в лекциях */
+.lecture-section ul, .lecture-section ol {
+    margin-left: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.lecture-section li {
+    margin-bottom: 0.7rem;
+    line-height: 1.6;
+    color: #e8b8cf;
+}
+
+/* Стили для подсветки кода */
+code {
+    background-color: rgba(42, 15, 26, 0.8);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    color: #ff8ebb;
+    border: 1px solid #4a1e33;
+}
+
+pre {
+    background: linear-gradient(145deg, #2a0f1a 0%, #1a0a12 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid #4a1e33;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+.lecture-content {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.lecture-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .lectures-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .card-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .btn {
+        text-align: center;
+        width: 100%;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+    
+    th, td {
+        padding: 10px;
+    }
+    
+    .lecture-section ul, .lecture-section ol {
+        margin-left: 1.5rem;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    nav ul li {
+        margin: 0.3rem 0;
+    }
+}
+
+/* Стили для печати */
+@media print {
+    .card-actions, .back-link, nav, footer {
+        display: none;
+    }
+    
+    .lecture-content {
+        box-shadow: none;
+        background: white;
+        color: black;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+}
+
+/* Дополнительные декоративные элементы */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 102, 163, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 182, 213, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(184, 107, 154, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}

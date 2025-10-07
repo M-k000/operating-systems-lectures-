@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ответы на вопросы - Лекция №6</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Лекции по операционным системам</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="lecture-6.html">Лекция №6</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <a href="lecture-6.html" class="back-link">← Назад к лекции</a>
+        
+        <div class="lecture-content">
+            <h2 class="lecture-title">Ответы на вопросы по Лекции №6: Микроядерная архитектура</h2>
+            
+            <ul class="questions-list">
+                <li class="question-item">
+                    <div class="question-text">1. Какие функции остаются в микроядре?</div>
+                    <div class="answer-text">
+                        В микроядре остаются только минимально необходимые базовые функции:
+                        <ul>
+                            <li>Диспетчеризация процессов (управление выполнением процессов)</li>
+                            <li>Управление памятью (распределение и защита памяти)</li>
+                            <li>Межпроцессное взаимодействие (IPC) - обмен сообщениями между процессами</li>
+                            <li>Обработка прерываний и базовых исключений</li>
+                            <li>Управление низкоуровневыми аппаратными ресурсами</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">2. В чем заключается суть клиент-серверной модели в микроядерных ОС?</div>
+                    <div class="answer-text">
+                        Суть клиент-серверной модели в микроядерных ОС заключается в:
+                        <ul>
+                            <li>Разделении системы на минимальное ядро и набор серверных процессов</li>
+                            <li>Выполнении большинства системных функций в виде отдельных серверов в пользовательском пространстве</li>
+                            <li>Взаимодействии клиентских приложений с серверами через механизм IPC</li>
+                            <li>Обеспечении изоляции компонентов и повышении надежности системы</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">3. Какой механизм обеспечивает взаимодействие между клиентами и серверами?</div>
+                    <div class="answer-text">
+                        Взаимодействие между клиентами и серверами обеспечивается механизмом <strong>межпроцессного взаимодействия (IPC - Inter-Process Communication)</strong>. Этот механизм позволяет процессам обмениваться данными и синхронизировать свою работу. В микроядерных системах IPC обычно реализуется через передачу сообщений между процессами.
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">4. Назовите три примера операционных систем, использующих микроядерную архитектуру.</div>
+                    <div class="answer-text">
+                        Примеры операционных систем с микроядерной архитектурой:
+                        <ul>
+                            <li><strong>QNX</strong> - ОС реального времени, используемая в автомобильной промышленности и встраиваемых системах</li>
+                            <li><strong>Minix</strong> - учебная операционная система, разработанная Эндрю Таненбаумом</li>
+                            <li><strong>L4</strong> - семейство микроядер второго поколения, используемое в различных встраиваемых системах</li>
+                            <li><strong>GNU Hurd</strong> - свободная операционная система на базе микроядра Mach</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">5. Какие преимущества и недостатки имеет микроядерная архитектура по сравнению с монолитной?</div>
+                    <div class="answer-text">
+                        <table style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <th style="border:1px solid #ddd; padding:8px;">Преимущества микроядерной архитектуры</th>
+                                <th style="border:1px solid #ddd; padding:8px;">Недостатки микроядерной архитектуры</th>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Лучшая надежность и отказоустойчивость</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Более низкая производительность</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Улучшенная безопасность</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Сложность разработки и отладки</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Модульность и гибкость</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Накладные расходы на IPC</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Легкость переноса на новые платформы</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Меньшая распространенность</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">6. Почему микроядерные ОС считаются более безопасными?</div>
+                    <div class="answer-text">
+                        Микроядерные ОС считаются более безопасными по нескольким причинам:
+                        <ul>
+                            <li>Минимальный код в привилегированном режиме (ядре) уменьшает поверхность атаки</li>
+                            <li>Изоляция компонентов предотвращает распространение сбоев и атак</li>
+                            <li>Большинство системных сервисов работают в пользовательском режиме с ограниченными правами</li>
+                            <li>Возможность более тонкого контроля прав доступа к отдельным сервисам</li>
+                            <li>Легче проводить аудит безопасности из-за модульной структуры</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">7. Как сбой в одном из серверных процессов влияет на работу системы?</div>
+                    <div class="answer-text">
+                        В микроядерной архитектуре сбой в одном серверном процессе обычно не приводит к краху всей системы:
+                        <ul>
+                            <li>Сбойный сервер может быть автоматически перезапущен без перезагрузки всей системы</li>
+                            <li>Другие серверы и приложения продолжают работать нормально</li>
+                            <li>Временная недоступность только тех услуг, которые предоставлял сбойный сервер</li>
+                            <li>Повышается общая надежность и отказоустойчивость системы</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">8. В каких случаях микроядерная архитектура предпочтительнее монолитной?</div>
+                    <div class="answer-text">
+                        Микроядерная архитектура предпочтительнее монолитной в следующих случаях:
+                        <ul>
+                            <li>В системах с высокими требованиями к надежности и отказоустойчивости</li>
+                            <li>В реальном времени, где важна предсказуемость поведения</li>
+                            <li>В защищенных системах с повышенными требованиями к безопасности</li>
+                            <li>В встраиваемых системах, где требуется гибкость и настраиваемость</li>
+                            <li>В исследовательских и образовательных целях</li>
+                            <li>При необходимости частой модификации или обновления компонентов системы</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">9. Составьте таблицу сравнения, где будет сравнение микроядерных ОС и монолитных ОС, обязательно указав примеры.</div>
+                    <div class="answer-text">
+                        <table style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <th style="border:1px solid #ddd; padding:8px;">Характеристика</th>
+                                <th style="border:1px solid #ddd; padding:8px;">Микроядерные ОС</th>
+                                <th style="border:1px solid #ddd; padding:8px;">Монолитные ОС</th>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Структура ядра</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Минимальное ядро + серверы в пользовательском пространстве</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Единое ядро со всеми компонентами</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Надежность</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Высокая (изоляция компонентов)</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Средняя (сбой в компоненте может привести к краху)</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Производительность</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Ниже (накладные расходы на IPC)</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Выше (прямой вызов функций)</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Безопасность</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Высокая (минимальный код в ядре)</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Ниже (больше кода в привилегированном режиме)</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Гибкость</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Высокая (легко менять компоненты)</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Ниже (требуется перекомпиляция ядра)</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Примеры</td>
+                                <td style="border:1px solid #ddd; padding:8px;">QNX, Minix, L4, GNU Hurd</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Linux, UNIX, Windows 9x</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Лекции по операционным системам</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

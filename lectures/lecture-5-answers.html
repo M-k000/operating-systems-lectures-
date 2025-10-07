@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ответы на вопросы - Лекция №5</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Лекции по операционным системам</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="lecture-5.html">Лекция №5</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <a href="lecture-5.html" class="back-link">← Назад к лекции</a>
+        
+        <div class="lecture-content">
+            <h2 class="lecture-title">Ответы на вопросы по Лекции №5: Операционное окружение</h2>
+            
+            <ul class="questions-list">
+                <li class="question-item">
+                    <div class="question-text">1. Что входит в состав операционного окружения?</div>
+                    <div class="answer-text">
+                        Состав операционного окружения включает:
+                        <ul>
+                            <li>Операционная система (ОС) - основной компонент</li>
+                            <li>Стандартные сервисные программы - утилиты для поддержки ОС</li>
+                            <li>Средства безопасности и защиты - антивирусы, фаерволы</li>
+                            <li>Командные оболочки - интерфейсы взаимодействия с ОС</li>
+                            <li>Библиотеки и драйверы - ПО для управления аппаратными средствами</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">2. Какие основные типы сервисных программ вы знаете?</div>
+                    <div class="answer-text">
+                        Основные типы сервисных программ:
+                        <ul>
+                            <li>Утилиты управления файлами (проводники, файловые менеджеры)</li>
+                            <li>Мониторы и анализаторы системы (диспетчеры задач, системные мониторы)</li>
+                            <li>Средства архивирования (программы для сжатия данных)</li>
+                            <li>Утилиты сетевого взаимодействия (сетевые диагностические инструменты)</li>
+                            <li>Средства безопасности (антивирусы, брандмауэры)</li>
+                            <li>Системы резервного копирования (программы для создания бэкапов)</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">3. В чем различие между базовой и расширенной машиной?</div>
+                    <div class="answer-text">
+                        <table style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <th style="border:1px solid #ddd; padding:8px;">Базовая машина</th>
+                                <th style="border:1px solid #ddd; padding:8px;">Расширенная машина</th>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Аппаратное оборудование компьютера</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Абстракция, созданная ОС</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Предоставляет основные ресурсы (процессор, память, устройства)</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Добавляет уровни управления, защиты и абстракции</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Минимальный набор оборудования</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Обеспечивает виртуализацию ресурсов и безопасность</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">4. Чем отличаются режим пользователя и режим супервизора?</div>
+                    <div class="answer-text">
+                        <table style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <th style="border:1px solid #ddd; padding:8px;">Режим пользователя</th>
+                                <th style="border:1px solid #ddd; padding:8px;">Режим супервизора (ядра)</th>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Выполняются обычные приложения</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Выполняется ОС и системные программы</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Ограниченные права доступа к ресурсам</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Полный доступ ко всем ресурсам системы</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Не может напрямую обращаться к аппаратным ресурсам</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Может выполнять привилегированные операции</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Взаимодействие с оборудованием через системные вызовы</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Прямое управление оборудованием</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Лекции по операционным системам</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

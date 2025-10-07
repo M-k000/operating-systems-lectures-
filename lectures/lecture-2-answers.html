@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ответы на вопросы - Лекция №2</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Лекции по операционным системам</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="lecture-2.html">Лекция №2</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <a href="lecture-2.html" class="back-link">← Назад к лекции</a>
+        
+        <div class="lecture-content">
+            <h2 class="lecture-title">Ответы на вопросы по Лекции №2: Файловая система и ввод-вывод информации</h2>
+            
+            <ul class="questions-list">
+                <li class="question-item">
+                    <div class="question-text">1. Какие основные функции выполняет файловая система?</div>
+                    <div class="answer-text">
+                        Файловая система выполняет следующие основные функции:
+                        <ul>
+                            <li>Организация хранения данных на устройствах</li>
+                            <li>Управление метаданными файлов (имя, размер, права доступа и т.д.)</li>
+                            <li>Обеспечение доступа к данным (чтение, запись, удаление)</li>
+                            <li>Управление правами доступа к файлам и каталогам</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">2. В чем разница между блоковыми и потоковыми устройствами ввода-вывода?</div>
+                    <div class="answer-text">
+                        <strong>Блоковые устройства</strong> работают с данными блоками фиксированного размера (например, жесткие диски, SSD), где данные можно читать и записывать блоками. <strong>Потоковые устройства</strong> обрабатывают данные по одному элементу (например, клавиатура, принтер), и взаимодействие с ними обычно более линейное.
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">3. Что такое DMA и какова его роль в системе ввода-вывода?</div>
+                    <div class="answer-text">
+                        DMA (Direct Memory Access) - это технология, позволяющая устройствам передачи данных напрямую в память, минуя процессор. Это ускоряет операции ввода-вывода, так как процессор освобождается от необходимости управлять каждой операцией передачи данных.
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">4. Какие методы архивации данных вы знаете?</div>
+                    <div class="answer-text">
+                        Существуют два основных метода архивации данных:
+                        <ul>
+                            <li><strong>Сжатие без потерь</strong> - данные сжимаются без потери информации (ZIP, GZIP, RAR)</li>
+                            <li><strong>Сжатие с потерями</strong> - данные сжимаются с потерей части информации (JPEG, MP3)</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">5. Какие инструменты архивации используются в различных операционных системах?</div>
+                    <div class="answer-text">
+                        <ul>
+                            <li>В Linux/Unix системах: tar и gzip</li>
+                            <li>В Windows: WinRAR, 7-Zip</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Лекции по операционным системам</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ответы на вопросы - Лекция №4</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Лекции по операционным системам</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="lecture-4.html">Лекция №4</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <a href="lecture-4.html" class="back-link">← Назад к лекции</a>
+        
+        <div class="lecture-content">
+            <h2 class="lecture-title">Ответы на вопросы по Лекции №4: Структура операционных систем</h2>
+            
+            <ul class="questions-list">
+                <li class="question-item">
+                    <div class="question-text">1. Какие основные компоненты входят в структуру операционной системы?</div>
+                    <div class="answer-text">
+                        Основные компоненты операционной системы:
+                        <ul>
+                            <li>Ядро (Kernel) - основной компонент, управляющий процессами, памятью, устройствами</li>
+                            <li>Менеджер процессов - управляет созданием, выполнением и завершением процессов</li>
+                            <li>Менеджер памяти - обеспечивает управление оперативной памятью</li>
+                            <li>Подсистема ввода/вывода - организует взаимодействие с внешними устройствами</li>
+                            <li>Файловая система - отвечает за организацию, хранение и управление данными</li>
+                            <li>Системные библиотеки - предоставляют функции для взаимодействия с ядром</li>
+                            <li>Пользовательский интерфейс - графический (GUI) или текстовый (CLI)</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">2. В чём отличия монолитного ядра от микроядра?</div>
+                    <div class="answer-text">
+                        <table style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <th style="border:1px solid #ddd; padding:8px;">Монолитное ядро</th>
+                                <th style="border:1px solid #ddd; padding:8px;">Микроядро</th>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Все компоненты в одном исполняемом файле</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Минимальный набор функций в ядре</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Высокая производительность</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Более низкая производительность из-за IPC</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Сложность отладки и сопровождения</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Лучшая надежность и безопасность</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px;">Пример: Linux, UNIX</td>
+                                <td style="border:1px solid #ddd; padding:8px;">Пример: Minix, QNX</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">3. Какие преимущества предоставляет клиент-серверная модель в микроядерной архитектуре?</div>
+                    <div class="answer-text">
+                        Преимущества клиент-серверной модели в микроядерной архитектуре:
+                        <ul>
+                            <li><strong>Изоляция и безопасность:</strong> Отказ одного сервиса не влияет на работу других</li>
+                            <li><strong>Модульность:</strong> Возможность замены или обновления компонентов без модификации ядра</li>
+                            <li><strong>Простота переноса:</strong> Адаптация для работы на разных аппаратных платформах</li>
+                            <li><strong>Минимизация кода в ядре:</strong> Снижение вероятности критических ошибок</li>
+                            <li><strong>Улучшенная отказоустойчивость:</strong> Проблемы в одном сервисе не приводят к краху всей системы</li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">4. Назовите примеры операционных систем, использующих микроядро.</div>
+                    <div class="answer-text">
+                        Примеры операционных систем с микроядерной архитектурой:
+                        <ul>
+                            <li><strong>Minix</strong> - образовательная ОС с микроядерной архитектурой</li>
+                            <li><strong>QNX</strong> - коммерческая ОС реального времени, используемая в автомобилестроении</li>
+                            <li><strong>GNU Hurd</strong> - экспериментальная ОС на базе микроядра Mach</li>
+                            <li><strong>L4</strong> - семейство микроядерных ОС для встраиваемых систем</li>
+                            <li><strong>Windows NT</strong> (современные версии) - используют гибридное ядро с элементами микроядерной архитектуры</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Лекции по операционным системам</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
