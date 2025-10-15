@@ -76,6 +76,16 @@ document.addEventListener('DOMContentLoaded', function() {
             navigator.clipboard.writeText(text).then(() => {
                 tooltip.innerHTML = '✓ Скопировано!';
                 setTimeout(() => tooltip.remove(), 1500);
+            }).catch(() => {
+                // Fallback для старых браузеров
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                tooltip.innerHTML = '✓ Скопировано!';
+                setTimeout(() => tooltip.remove(), 1500);
             });
         });
         
@@ -149,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollToTopBtn.style.boxShadow = '0 6px 20px rgba(255, 102, 163, 0.4)';
     scrollToTopBtn.style.transition = 'all 0.3s ease';
     scrollToTopBtn.style.fontWeight = 'bold';
+    scrollToTopBtn.style.opacity = '0';
     
     // Ховер-эффекты для кнопки
     scrollToTopBtn.addEventListener('mouseenter', function() {
@@ -187,9 +198,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Добавляем функциональность для сворачивания/разворачивания разделов
-    const sectionHeaders = document.querySelectorAll('.lecture-section h3, .question-item');
+    const sectionHeaders = document.querySelectorAll('.lecture-section h3, .question-item .question-text');
     
     sectionHeaders.forEach(header => {
+        if (!header) return;
+        
         // Добавляем индикатор сворачивания
         const indicator = document.createElement('span');
         indicator.innerHTML = '▼';
@@ -203,20 +216,32 @@ document.addEventListener('DOMContentLoaded', function() {
         header.style.alignItems = 'center';
         header.style.justifyContent = 'space-between';
         
-        // Для заголовков секций перемещаем индикатор в начало
-        if (header.classList.contains('lecture-section')) {
-            header.parentNode.insertBefore(indicator, header);
-        } else {
-            header.appendChild(indicator);
-        }
+        // Добавляем индикатор в заголовок
+        header.appendChild(indicator);
         
         header.addEventListener('click', function() {
-            const content = this.nextElementSibling;
-            if (content && (content.classList.contains('lecture-section-content') || 
-                           content.classList.contains('answer-text') ||
+            let content;
+            
+            if (this.classList.contains('question-text')) {
+                content = this.nextElementSibling;
+            } else {
+                content = this.parentNode;
+                let nextElement = this.nextElementSibling;
+                while (nextElement && !nextElement.classList.contains('lecture-section')) {
+                    if (nextElement.tagName === 'P' || nextElement.tagName === 'UL' || nextElement.tagName === 'OL' || nextElement.tagName === 'TABLE') {
+                        content = nextElement;
+                        break;
+                    }
+                    nextElement = nextElement.nextElementSibling;
+                }
+            }
+            
+            if (content && (content.classList.contains('answer-text') ||
                            content.tagName === 'P' || 
                            content.tagName === 'UL' || 
-                           content.tagName === 'OL')) {
+                           content.tagName === 'OL' ||
+                           content.tagName === 'TABLE' ||
+                           content.classList.contains('lecture-section'))) {
                 
                 if (content.style.display === 'none') {
                     content.style.display = 'block';
@@ -255,36 +280,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Добавляем стили для активных ссылок навигации
+    // Добавляем дополнительные стили
     const style = document.createElement('style');
     style.textContent = `
-        nav a.active {
-            background: linear-gradient(135deg, rgba(255, 102, 163, 0.3) 0%, rgba(255, 182, 213, 0.2) 100%) !important;
-            color: #ff66a3 !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 102, 163, 0.3);
-        }
-        
-        .tooltip-btn {
-            background: linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%);
-            color: #2a0f1a;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .tooltip-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(255, 102, 163, 0.4);
-        }
-        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .selection-tooltip {
+            animation: fadeIn 0.3s ease-out !important;
         }
     `;
     document.head.appendChild(style);
