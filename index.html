@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лекции по операционным системам</title>
+    <title>Лекции по операционным системам и проектированию ИС</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <h1>Лекции по операционным системам</h1>
+        <h1>Лекции по операционным системам и проектированию ИС</h1>
         <nav>
             <ul>
-                <li><a href="#lectures">Список лекций</a></li>
+                <li><a href="#lectures">Лекции по ОС</a></li>
+                <li><a href="#practical">Практические работы</a></li>
                 <li><a href="#about">О проекте</a></li>
             </ul>
         </nav>
@@ -19,7 +20,7 @@
 
     <main>
         <section id="lectures">
-            <h2>Список лекций</h2>
+            <h2>Лекции по операционным системам</h2>
             <div class="lectures-grid">
                 <div class="lecture-card">
                     <h3>Лекция №2</h3>
@@ -77,11 +78,55 @@
             </div>
         </section>
 
+        <section id="practical">
+            <h2>Практические работы по проектированию ИС</h2>
+            <div class="lectures-grid">
+                <div class="lecture-card">
+                    <h3>Практическая работа №1</h3>
+                    <p>Формирование требований пользователя к информационной системе. Методы сбора требований, стейкхолдеры, критерии SMART.</p>
+                    <div class="card-actions">
+                        <a href="practicals/practical-1.html" class="btn">Читать работу</a>
+                        <a href="practicals/practical-1-answers.html" class="btn btn-secondary">Ответы на вопросы</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="about">
             <h2>О проекте</h2>
-            <p>Этот проект содержит материалы лекций по операционным системам, включая основные концепции, архитектуры и принципы работы современных ОС.</p>
+            <div class="about-content">
+                <div class="about-section">
+                    <h3>Операционные системы</h3>
+                    <p>Этот раздел содержит материалы лекций по операционным системам, включая основные концепции, архитектуры и принципы работы современных ОС. Рассматриваются файловые системы, виды ядер, микроядерная архитектура, прерывания и другие фундаментальные темы.</p>
+                </div>
+                
+                <div class="about-section">
+                    <h3>Проектирование информационных систем</h3>
+                    <p>В этом разделе представлены практические работы по проектированию и дизайну информационных систем. Основное внимание уделяется методам сбора требований, работе со стейкхолдерами и документированию спецификаций.</p>
+                </div>
+                
+                <div class="about-section">
+                    <h3>Структура проекта</h3>
+                    <ul>
+                        <li><strong>Лекции</strong> - теоретические материалы по операционным системам</li>
+                        <li><strong>Ответы на вопросы</strong> - развернутые ответы на контрольные вопросы</li>
+                        <li><strong>Практические работы</strong> - задания по проектированию информационных систем</li>
+                    </ul>
+                </div>
+            </div>
         </section>
     </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Лекции по операционным системам и проектированию информационных систем</p>
+            <div class="footer-links">
+                <a href="#lectures">Лекции по ОС</a>
+                <a href="#practical">Практические работы</a>
+                <a href="#about">О проекте</a>
+            </div>
+        </div>
+    </footer>
 
     <script src="js/script.js"></script>
 </body>
