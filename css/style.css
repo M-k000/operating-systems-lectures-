@@ -595,7 +595,7 @@ pre code {
 
 /* ===== СТИЛИ ДЛЯ ССЫЛОК "ОТВЕТЫ НА ВОПРОСЫ" НА СТРАНИЦАХ ЛЕКЦИЙ ===== */
 
-/* стили для существующих ссылок "Ответы на вопросы" в лекциях */
+/* Стили для существующих ссылок "Ответы на вопросы" в лекциях */
 .lecture-content a[href*="answers"]:not(.btn),
 .lecture-content a[href*="Ответы"]:not(.btn) {
     display: inline-flex;
@@ -619,7 +619,7 @@ pre code {
     text-decoration: none !important;
 }
 
-/* стили для карточек действий в лекциях */
+/* Стили для карточек действий в лекциях */
 .card-actions {
     display: flex;
     gap: 1rem;
@@ -662,7 +662,7 @@ pre code {
     transform: translateY(-2px);
 }
 
-/* стили для ссылок внизу страниц лекций */
+/* Стили для ссылок внизу страниц лекций */
 .lecture-content > a:last-child:not(.back-link),
 .card-actions:last-child a {
     display: inline-flex !important;
@@ -686,7 +686,7 @@ pre code {
     text-decoration: none !important;
 }
 
-/* точно ли все ссылки с текстом "ответы" стилизованы */
+/* Убедимся, что все ссылки с текстом "ответы" стилизованы */
 a[href*="answer"]:not(.btn),
 a:contains("Ответы"):not(.btn),
 a:contains("ответы"):not(.btn) {
@@ -711,71 +711,3 @@ a:contains("ответы"):not(.btn):hover {
     box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4) !important;
 }
 
-
-/* ===== Я НЕ МОГУ УЖЕ ЭТО РЕДАЧИТЬ, АААА" ===== */
-
-/* стили для верхней ссылки "Ответы на вопросы" - делаем обычной текстовой */
-.header-answers-link {
-    color: var(--text-light) !important;
-    text-decoration: none !important;
-    padding: 0.5rem 1rem !important;
-    border-radius: 8px !important;
-    transition: all 0.3s ease !important;
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    margin: 0 !important;
-    font-weight: normal !important;
-    display: inline !important;
-}
-
-.header-answers-link:hover {
-    background: rgba(255, 102, 163, 0.1) !important;
-    color: var(--primary) !important;
-    transform: none !important;
-    text-decoration: none !important;
-}
-
-/* стили для нижней кнопки "Ответы на вопросы" - оставляем как есть */
-.card-actions .btn-primary,
-.lecture-content .card-actions a[href*="answers"] {
-    display: inline-flex !important;
-    align-items: center;
-    padding: 0.8rem 1.5rem !important;
-    background: var(--gradient) !important;
-    color: var(--bg-dark) !important;
-    text-decoration: none !important;
-    border-radius: 8px !important;
-    font-weight: 600 !important;
-    transition: all 0.3s ease !important;
-    margin: 1rem 0 !important;
-    border: none !important;
-    box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3) !important;
-}
-
-.card-actions .btn-primary:hover,
-.lecture-content .card-actions a[href*="answers"]:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4) !important;
-    text-decoration: none !important;
-}
-
-/* убираю стилизацию для верхней ссылки в навигации */
-.nav-menu .header-answers-link {
-    background: none !important;
-    color: var(--text-light) !important;
-    padding: 0.5rem 1rem !important;
-    border-radius: 8px !important;
-    transition: all 0.3s ease !important;
-    text-decoration: none !important;
-    display: block !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-    font-weight: normal !important;
-}
-
-.nav-menu .header-answers-link:hover {
-    background: rgba(255, 102, 163, 0.1) !important;
-    color: var(--primary) !important;
-    transform: none !important;
-}
