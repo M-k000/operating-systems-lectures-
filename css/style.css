@@ -592,3 +592,121 @@ pre code {
         padding: 0.7rem;
     }
 }
+
+/* ===== СТИЛИ ДЛЯ ССЫЛОК "ОТВЕТЫ НА ВОПРОСЫ" НА СТРАНИЦАХ ЛЕКЦИЙ ===== */
+
+/* Стили для существующих ссылок "Ответы на вопросы" в лекциях */
+.lecture-content a[href*="answers"]:not(.btn),
+.lecture-content a[href*="Ответы"]:not(.btn) {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background: var(--gradient);
+    color: var(--bg-dark) !important;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 1rem 0;
+    border: none;
+    box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3);
+}
+
+.lecture-content a[href*="answers"]:not(.btn):hover,
+.lecture-content a[href*="Ответы"]:not(.btn):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4);
+    text-decoration: none !important;
+}
+
+/* Стили для карточек действий в лекциях */
+.card-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.card-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.card-actions .btn-primary {
+    background: var(--gradient);
+    color: var(--bg-dark);
+}
+
+.card-actions .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4);
+}
+
+.card-actions .btn-secondary {
+    background: rgba(255, 102, 163, 0.1);
+    color: var(--accent);
+    border: 1px solid var(--border);
+}
+
+.card-actions .btn-secondary:hover {
+    background: rgba(255, 102, 163, 0.2);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Стили для ссылок внизу страниц лекций */
+.lecture-content > a:last-child:not(.back-link),
+.card-actions:last-child a {
+    display: inline-flex !important;
+    align-items: center;
+    padding: 0.8rem 1.5rem !important;
+    background: var(--gradient) !important;
+    color: var(--bg-dark) !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    margin: 1rem 0 !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3) !important;
+}
+
+.lecture-content > a:last-child:not(.back-link):hover,
+.card-actions:last-child a:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4) !important;
+    text-decoration: none !important;
+}
+
+/* Убедимся, что все ссылки с текстом "ответы" стилизованы */
+a[href*="answer"]:not(.btn),
+a:contains("Ответы"):not(.btn),
+a:contains("ответы"):not(.btn) {
+    display: inline-flex !important;
+    align-items: center;
+    padding: 0.8rem 1.5rem !important;
+    background: var(--gradient) !important;
+    color: var(--bg-dark) !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    margin: 1rem 0 !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3) !important;
+}
+
+a[href*="answer"]:not(.btn):hover,
+a:contains("Ответы"):not(.btn):hover,
+a:contains("ответы"):not(.btn):hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4) !important;
+}
