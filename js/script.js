@@ -1,222 +1,198 @@
-// Упрощенный и эффективный JavaScript для поиска
-class SearchManager {
+// Simple and reliable search functionality
+class SimpleSearch {
     constructor() {
         this.searchData = [];
         this.init();
     }
 
-    async init() {
-        await this.loadSearchData();
+    init() {
+        this.loadSearchData();
         this.setupSearch();
-        this.setupSmoothScroll();
+        this.setupNavigation();
     }
 
-    // Загрузка данных для поиска
-    async loadSearchData() {
-        // Собираем данные со всех страниц
+    loadSearchData() {
         this.searchData = [
+            // Lectures
             {
                 title: "Лекция 2: Файловая система и ввод-вывод",
-                content: "Организация хранения данных, механизмы ввода-вывода и архивация данных в операционных системах",
+                content: "Файловая система и ввод-вывод информации. Организация хранения данных. Архивация данных.",
                 url: "lectures/lecture-2.html",
                 type: "lecture"
             },
             {
                 title: "Лекция 3: Языки взаимодействия с ОС",
-                content: "Программные интерфейсы, виды интерфейсов и методы взаимодействия пользователя с операционной системой",
+                content: "Языки взаимодействия пользователя с операционной системой. Понятие программного интерфейса.",
                 url: "lectures/lecture-3.html",
                 type: "lecture"
             },
             {
                 title: "Лекция 4: Структура операционных систем",
-                content: "Виды ядер ОС, микроядерная архитектура и клиент-серверная модель. Сравнение монолитных систем",
+                content: "Структура операционных систем. Виды ядра операционных систем. Микроядерная архитектура.",
                 url: "lectures/lecture-4.html",
                 type: "lecture"
             },
             {
                 title: "Лекция 5: Операционное окружение",
-                content: "Сервисные программы, базовая и расширенная машины, режимы работы процессора",
+                content: "Операционное окружение, сервисные программы, базовая и расширенная машины, режимы работы.",
                 url: "lectures/lecture-5.html",
                 type: "lecture"
             },
             {
                 title: "Лекция 6: Микроядерная архитектура",
-                content: "Глубокое погружение в микроядерную архитектуру, преимущества и недостатки",
+                content: "Микроядерная архитектура (модель клиент-сервер).",
                 url: "lectures/lecture-6.html",
                 type: "lecture"
             },
             {
                 title: "Лекция 10: Понятие прерывания",
-                content: "Классы прерываний, последовательность обработки, рабочая область прерываний",
+                content: "Понятие прерывания. Последовательность действий при обработке прерываний. Классы прерываний.",
                 url: "lectures/lecture-10.html",
                 type: "lecture"
             },
+            
+            // Answers
             {
-                title: "УП.05: Сбор исходных данных",
-                content: "Методы сбора и анализа исходных данных для разработки проектной документации",
-                url: "practicals/up05-data-collection.html",
-                type: "practical"
-            },
-            // Ответы на вопросы
-            {
-                title: "Ответы: Файловая система и ввод-вывод",
-                content: "Основные функции файловой системы, различия блоковых и потоковых устройств, DMA",
+                title: "Ответы: Лекция 2",
+                content: "Ответы на вопросы по файловой системе и вводу-выводу",
                 url: "lectures/lecture-2-answers.html",
                 type: "answers"
             },
             {
-                title: "Ответы: Языки взаимодействия с ОС",
-                content: "Отличия текстовых и графических интерфейсов, назначение API, виды интерфейсов",
+                title: "Ответы: Лекция 3",
+                content: "Ответы на вопросы по языкам взаимодействия с ОС",
                 url: "lectures/lecture-3-answers.html",
                 type: "answers"
             },
             {
-                title: "Ответы: Структура операционных систем",
-                content: "Основные компоненты ОС, отличия монолитного ядра от микроядра, преимущества микроядерной архитектуры",
+                title: "Ответы: Лекция 4",
+                content: "Ответы на вопросы по структуре операционных систем",
                 url: "lectures/lecture-4-answers.html",
                 type: "answers"
             },
             {
-                title: "Ответы: Операционное окружение",
-                content: "Состав операционного окружения, типы сервисных программ, различия базовой и расширенной машины",
+                title: "Ответы: Лекция 5",
+                content: "Ответы на вопросы по операционному окружению",
                 url: "lectures/lecture-5-answers.html",
                 type: "answers"
             },
             {
-                title: "Ответы: Микроядерная архитектура",
-                content: "Функции микроядра, клиент-серверная модель, механизмы взаимодействия, примеры ОС",
+                title: "Ответы: Лекция 6",
+                content: "Ответы на вопросы по микроядерной архитектуре",
                 url: "lectures/lecture-6-answers.html",
                 type: "answers"
             },
             {
-                title: "Ответы: Понятие прерывания",
-                content: "Определение прерывания, последовательность обработки, классы прерываний, рабочая область",
+                title: "Ответы: Лекция 10",
+                content: "Ответы на вопросы по прерываниям",
                 url: "lectures/lecture-10-answers.html",
+                type: "answers"
+            },
+            
+            // Practical works
+            {
+                title: "УП.05 - Сбор исходных данных",
+                content: "Сбор исходных данных для разработки проектной документации на информационную систему",
+                url: "practicals/up05-data-collection.html",
+                type: "practical"
+            },
+            {
+                title: "Практическая работа 1",
+                content: "Формирование требований пользователя к информационной системе",
+                url: "practicals/practical-1.html",
+                type: "practical"
+            },
+            {
+                title: "Ответы: Практическая работа 1",
+                content: "Ответы на контрольные вопросы по практической работе 1",
+                url: "practicals/practical-1-answers.html",
                 type: "answers"
             }
         ];
     }
 
-    // Настройка поиска
     setupSearch() {
         const searchInput = document.querySelector('.search-input');
         const searchResults = document.querySelector('.search-results');
         
         if (!searchInput || !searchResults) return;
 
-        let searchTimeout;
+        let timeout;
 
         searchInput.addEventListener('input', (e) => {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                this.handleSearch(e.target.value, searchResults);
-            }, 200);
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                this.performSearch(e.target.value, searchResults);
+            }, 300);
         });
 
         searchInput.addEventListener('focus', () => {
             if (searchInput.value.trim()) {
-                this.handleSearch(searchInput.value, searchResults);
+                this.performSearch(searchInput.value, searchResults);
             }
         });
 
-        // Закрытие результатов при клике вне области поиска
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) {
                 searchResults.style.display = 'none';
             }
         });
-
-        // Обработка клавиш
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                searchResults.style.display = 'none';
-                searchInput.blur();
-            }
-        });
     }
 
-    // Обработка поискового запроса
-    handleSearch(query, resultsContainer) {
-        const trimmedQuery = query.trim().toLowerCase();
+    performSearch(query, container) {
+        const trimmed = query.trim().toLowerCase();
         
-        if (!trimmedQuery) {
-            resultsContainer.style.display = 'none';
+        if (!trimmed) {
+            container.style.display = 'none';
             return;
         }
 
-        const results = this.searchData.filter(item => 
-            item.title.toLowerCase().includes(trimmedQuery) ||
-            item.content.toLowerCase().includes(trimmedQuery)
+        const results = this.searchData.filter(item =>
+            item.title.toLowerCase().includes(trimmed) ||
+            item.content.toLowerCase().includes(trimmed)
         );
 
-        this.displayResults(results, resultsContainer, trimmedQuery);
+        this.showResults(results, container);
     }
 
-    // Отображение результатов
-    displayResults(results, container, query) {
+    showResults(results, container) {
         container.innerHTML = '';
 
         if (results.length === 0) {
             const noResults = document.createElement('div');
-            noResults.className = 'no-results';
-            noResults.textContent = `Ничего не найдено для "${query}"`;
+            noResults.className = 'search-result-item';
+            noResults.textContent = 'Ничего не найдено';
             container.appendChild(noResults);
         } else {
             results.forEach(result => {
-                const resultItem = document.createElement('div');
-                resultItem.className = 'search-result-item';
-                
-                // Подсветка совпадений
-                const highlightedTitle = this.highlightText(result.title, query);
-                const highlightedContent = this.highlightText(result.content, query);
-                
-                resultItem.innerHTML = `
-                    <div class="search-result-title">${highlightedTitle}</div>
-                    <div class="search-result-content">${highlightedContent}</div>
+                const item = document.createElement('div');
+                item.className = 'search-result-item';
+                item.innerHTML = `
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">${result.title}</div>
+                    <div style="font-size: 0.9rem; color: var(--text-muted);">${result.content}</div>
                 `;
                 
-                resultItem.addEventListener('click', () => {
+                item.addEventListener('click', () => {
                     window.location.href = result.url;
                 });
                 
-                container.appendChild(resultItem);
+                container.appendChild(item);
             });
         }
         
         container.style.display = 'block';
     }
 
-    // Подсветка текста в результатах
-    highlightText(text, query) {
-        if (!query) return text;
-        
-        const regex = new RegExp(`(${this.escapeRegex(query)})`, 'gi');
-        return text.replace(regex, '<mark style="background: var(--primary); color: var(--bg-dark); padding: 0.1rem 0.2rem; border-radius: 3px;">$1</mark>');
-    }
-
-    escapeRegex(string) {
-        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-
-    // Плавная прокрутка
-    setupSmoothScroll() {
-        const links = document.querySelectorAll('a[href^="#"]');
-        
-        links.forEach(link => {
+    setupNavigation() {
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = link.getAttribute('href');
-                
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
@@ -224,33 +200,20 @@ class SearchManager {
     }
 }
 
-// Инициализация при загрузке страницы
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    new SearchManager();
+    new SimpleSearch();
     
-    // Добавляем небольшую анимацию для карточек
-    const cards = document.querySelectorAll('.lecture-card');
+    // Add fade-in animation for cards
+    const cards = document.querySelectorAll('.card');
     cards.forEach((card, index) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(20px)';
         
         setTimeout(() => {
-            card.style.transition = 'all 0.5s ease';
+            card.style.transition = 'all 0.4s ease';
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
         }, index * 100);
     });
 });
-
-// Утилита для debounce
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
