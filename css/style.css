@@ -710,3 +710,54 @@ a:contains("ответы"):not(.btn):hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4) !important;
 }
+
+/* ГАРАНТИРОВАННЫЕ СТИЛИ ДЛЯ ССЫЛОК ОТВЕТОВ */
+main a[href*="-answers.html"]:not(.back-link):not(.nav-link) {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.8rem 1.5rem !important;
+    background: linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%) !important;
+    color: #2a0f1a !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    margin: 1rem 0 !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3) !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-size: 0.9rem !important;
+    min-width: 200px !important;
+    text-align: center !important;
+}
+
+main a[href*="-answers.html"]:not(.back-link):not(.nav-link):hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4) !important;
+    text-decoration: none !important;
+}
+
+/* Стили для ссылок внутри card-actions */
+.card-actions a[href*="-answers.html"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.8rem 1.5rem !important;
+    background: linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%) !important;
+    color: #2a0f1a !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3) !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-size: 0.9rem !important;
+    min-width: 200px !important;
+}
+
+.card-actions a[href*="-answers.html"]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4) !important;
+}
