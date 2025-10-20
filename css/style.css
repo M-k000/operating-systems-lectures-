@@ -711,3 +711,80 @@ a:contains("ответы"):not(.btn):hover {
     box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4) !important;
 }
 
+/* ===== ИСПРАВЛЕНИЯ ДЛЯ ВЕРХНЕЙ ССЫЛКИ "ОТВЕТЫ НА ВОПРОСЫ" ===== */
+
+/* Стили для верхней ссылки "Ответы на вопросы" - делаем как ссылка "Назад" */
+.answers-top-link {
+    display: inline-flex !important;
+    align-items: center;
+    padding: 0.7rem 1.5rem !important;
+    background: rgba(255, 102, 163, 0.1) !important;
+    color: var(--accent) !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--border) !important;
+    margin-bottom: 2rem !important;
+    transition: all 0.3s ease !important;
+    font-weight: 500 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    color: var(--text-light) !important;
+}
+
+.answers-top-link:hover {
+    background: rgba(255, 102, 163, 0.1) !important;
+    color: var(--primary) !important;
+    transform: none !important;
+    text-decoration: none !important;
+    border: 1px solid var(--border) !important;
+}
+
+/* Убираем стили кнопки для верхней ссылки */
+.lecture-content > a[href*="answers"]:not(.back-link),
+.lecture-content > a[href*="ответы"]:not(.back-link) {
+    display: inline-flex !important;
+    align-items: center;
+    padding: 0.7rem 1.5rem !important;
+    background: rgba(255, 102, 163, 0.1) !important;
+    color: var(--accent) !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--border) !important;
+    margin-bottom: 2rem !important;
+    transition: all 0.3s ease !important;
+    font-weight: 500 !important;
+}
+
+.lecture-content > a[href*="answers"]:not(.back-link):hover,
+.lecture-content > a[href*="ответы"]:not(.back-link):hover {
+    background: rgba(255, 102, 163, 0.2) !important;
+    border-color: var(--primary) !important;
+    transform: none !important;
+    text-decoration: none !important;
+}
+
+/* Нижняя кнопка остается стилизованной */
+.card-actions .btn-primary,
+.lecture-content .card-actions a[href*="answers"] {
+    display: inline-flex !important;
+    align-items: center;
+    padding: 0.8rem 1.5rem !important;
+    background: var(--gradient) !important;
+    color: var(--bg-dark) !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    margin: 1rem 0 !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3) !important;
+}
+
+.card-actions .btn-primary:hover,
+.lecture-content .card-actions a[href*="answers"]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4) !important;
+    text-decoration: none !important;
+}
