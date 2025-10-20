@@ -307,3 +307,288 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary-dark);
 }
+
+/* ===== СТИЛИ ДЛЯ ВСЕХ СТРАНИЦ ЛЕКЦИЙ И ПРАКТИЧЕСКИХ РАБОТ ===== */
+
+/* Стили для страниц лекций */
+.lecture-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.lecture-title {
+    color: var(--text-light);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--primary);
+}
+
+.lecture-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 102, 163, 0.05);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+}
+
+.lecture-section h3 {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.lecture-section h4 {
+    color: var(--accent);
+    margin: 1.5rem 0 1rem 0;
+    font-size: 1.1rem;
+}
+
+.lecture-section p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.lecture-section ul, .lecture-section ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+}
+
+.lecture-section li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+/* Стили для страниц с вопросами */
+.questions-list {
+    list-style: none;
+    margin-left: 0;
+}
+
+.question-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.question-item:hover {
+    border-color: var(--primary);
+    transform: translateX(5px);
+}
+
+.question-text {
+    color: var(--text-light);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.answer-text {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.answer-text ul, .answer-text ol {
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.answer-text li {
+    margin-bottom: 0.3rem;
+}
+
+/* Стили для таблиц */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid var(--border);
+    padding: 1rem;
+    text-align: left;
+}
+
+th {
+    background: var(--primary);
+    color: var(--bg-dark);
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 102, 163, 0.05);
+}
+
+/* Стили для ссылок "Назад" */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.7rem 1.5rem;
+    background: rgba(255, 102, 163, 0.1);
+    color: var(--accent);
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    background: rgba(255, 102, 163, 0.2);
+    border-color: var(--primary);
+    transform: translateX(-5px);
+}
+
+/* Стили для кнопок действий на страницах лекций */
+.card-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Убедимся, что все ссылки выглядят одинаково */
+a:not(.nav-link):not(.btn):not(.back-link) {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:not(.nav-link):not(.btn):not(.back-link):hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+/* Стили для кода */
+code {
+    background: rgba(255, 102, 163, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: var(--accent);
+    font-family: 'Courier New', monospace;
+    border: 1px solid var(--border);
+}
+
+pre {
+    background: var(--bg-card);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+    border: 1px solid var(--border);
+}
+
+pre code {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+/* Стили для практических работ */
+.requirements-types, .methods-grid, .mistakes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.req-type, .method-item, .mistake-item {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.req-type h5, .method-item h5, .mistake-item h5 {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.solution {
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    color: #a5d6a7;
+}
+
+.process-steps {
+    list-style: none;
+    counter-reset: step-counter;
+}
+
+.process-steps > li {
+    counter-increment: step-counter;
+    background: var(--bg-card);
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+    position: relative;
+}
+
+.process-steps > li::before {
+    content: counter(step-counter);
+    background: var(--primary);
+    color: var(--bg-dark);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    position: absolute;
+    left: -1rem;
+    top: 1.5rem;
+}
+
+/* Адаптивность для страниц лекций */
+@media (max-width: 768px) {
+    .lecture-content {
+        padding: 1rem;
+    }
+    
+    .lecture-title {
+        font-size: 1.5rem;
+    }
+    
+    .card-actions {
+        flex-direction: column;
+    }
+    
+    .back-link {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .process-steps > li::before {
+        position: static;
+        margin-bottom: 1rem;
+        display: inline-flex;
+        margin-right: 1rem;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+    
+    th, td {
+        padding: 0.7rem;
+    }
+}
