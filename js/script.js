@@ -9,11 +9,12 @@ class SimpleSearch {
         this.loadSearchData();
         this.setupSearch();
         this.setupNavigation();
+        this.setupAnimations();
     }
 
     loadSearchData() {
         this.searchData = [
-            // Lectures
+            // OS Lectures
             {
                 title: "Лекция 2: Файловая система и ввод-вывод",
                 content: "Файловая система и ввод-вывод информации. Организация хранения данных. Архивация данных.",
@@ -50,10 +51,63 @@ class SimpleSearch {
                 url: "lectures/lecture-10.html",
                 type: "lecture"
             },
+            
+            // Answers
+            {
+                title: "Ответы: Лекция 2",
+                content: "Ответы на вопросы по файловой системе и вводу-выводу",
+                url: "lectures/lecture-2-answers.html",
+                type: "answers"
+            },
+            {
+                title: "Ответы: Лекция 3",
+                content: "Ответы на вопросы по языкам взаимодействия с ОС",
+                url: "lectures/lecture-3-answers.html",
+                type: "answers"
+            },
+            {
+                title: "Ответы: Лекция 4",
+                content: "Ответы на вопросы по структуре операционных систем",
+                url: "lectures/lecture-4-answers.html",
+                type: "answers"
+            },
+            {
+                title: "Ответы: Лекция 5",
+                content: "Ответы на вопросы по операционному окружению",
+                url: "lectures/lecture-5-answers.html",
+                type: "answers"
+            },
+            {
+                title: "Ответы: Лекция 6",
+                content: "Ответы на вопросы по микроядерной архитектуре",
+                url: "lectures/lecture-6-answers.html",
+                type: "answers"
+            },
+            {
+                title: "Ответы: Лекция 10",
+                content: "Ответы на вопросы по прерываниям",
+                url: "lectures/lecture-10-answers.html",
+                type: "answers"
+            },
+            
+            // MDK Design
+            {
+                title: "МДК 05.01: Лекция 1 - Основные понятия",
+                content: "Основные понятия и история развития технологии проектирования",
+                url: "mdk-design/lecture-1.html",
+                type: "mdk"
+            },
+            {
+                title: "МДК 05.01: Лекция 2 - Разработка ТЗ",
+                content: "Разработка ТЗ. Этапы создания. Разработка эскизного и технического проекта",
+                url: "mdk-design/lecture-2.html",
+                type: "mdk"
+            },
+            
             // Practical works
             {
-                title: "УП.05: Сбор исходных данных",
-                content: "Сбор исходных данных для разработки проектной документации на информационную систему.",
+                title: "УП.05 - Сбор исходных данных",
+                content: "Сбор исходных данных для разработки проектной документации на информационную систему",
                 url: "practicals/up05-data-collection.html",
                 type: "practical"
             }
@@ -63,64 +117,81 @@ class SimpleSearch {
     setupSearch() {
         const searchInput = document.querySelector('.search-input');
         const searchResults = document.querySelector('.search-results');
-
+        
         if (!searchInput || !searchResults) return;
 
+        let timeout;
+
         searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            
-            if (query.length < 2) {
-                searchResults.style.display = 'none';
-                return;
-            }
-
-            const results = this.searchData.filter(item => 
-                item.title.toLowerCase().includes(query) || 
-                item.content.toLowerCase().includes(query)
-            );
-
-            this.displayResults(results, searchResults);
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                this.performSearch(e.target.value, searchResults);
+            }, 300);
         });
 
-        // Hide results when clicking outside
+        searchInput.addEventListener('focus', () => {
+            if (searchInput.value.trim()) {
+                this.performSearch(searchInput.value, searchResults);
+            }
+        });
+
         document.addEventListener('click', (e) => {
-            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            if (!e.target.closest('.search-container')) {
                 searchResults.style.display = 'none';
             }
         });
     }
 
-    displayResults(results, container) {
-        if (results.length === 0) {
-            container.innerHTML = '<div class="search-result-item">Ничего не найдено</div>';
-            container.style.display = 'block';
+    performSearch(query, container) {
+        const trimmed = query.trim().toLowerCase();
+        
+        if (!trimmed) {
+            container.style.display = 'none';
             return;
         }
 
-        container.innerHTML = results.map(item => `
-            <div class="search-result-item" data-url="${item.url}">
-                <div class="result-title">${item.title}</div>
-                <div class="result-content">${item.content.substring(0, 100)}...</div>
-                <div class="result-type">${item.type === 'lecture' ? 'Лекция' : 'Практика'}</div>
-            </div>
-        `).join('');
+        const results = this.searchData.filter(item =>
+            item.title.toLowerCase().includes(trimmed) ||
+            item.content.toLowerCase().includes(trimmed)
+        );
 
-        container.style.display = 'block';
+        this.showResults(results, container);
+    }
 
-        // Add click handlers
-        container.querySelectorAll('.search-result-item').forEach(item => {
-            item.addEventListener('click', () => {
-                window.location.href = item.dataset.url;
+    showResults(results, container) {
+        container.innerHTML = '';
+
+        if (results.length === 0) {
+            const noResults = document.createElement('div');
+            noResults.className = 'search-result-item';
+            noResults.textContent = 'Ничего не найдено';
+            container.appendChild(noResults);
+        } else {
+            results.forEach(result => {
+                const item = document.createElement('div');
+                item.className = 'search-result-item';
+                item.innerHTML = `
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">${result.title}</div>
+                    <div style="font-size: 0.9rem; color: var(--text-muted);">${result.content}</div>
+                `;
+                
+                item.addEventListener('click', () => {
+                    window.location.href = result.url;
+                });
+                
+                container.appendChild(item);
             });
-        });
+        }
+        
+        container.style.display = 'block';
     }
 
     setupNavigation() {
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(link.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
@@ -129,64 +200,93 @@ class SimpleSearch {
                 }
             });
         });
-
-        // Add animation to list items on scroll
-        this.setupScrollAnimations();
     }
 
-    setupScrollAnimations() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateX(0)';
-                }
+    setupAnimations() {
+        // Add hover effects to list items
+        const listItems = document.querySelectorAll('.list-item');
+        
+        listItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-5px)';
             });
-        }, observerOptions);
-
-        // Observe list items
-        document.querySelectorAll('.list-item').forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateX(-20px)';
-            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(item);
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0)';
+            });
         });
     }
 }
 
-// Initialize when DOM is loaded
+// Функция для применения стилей ко всем страницам
+function applyGlobalStyles() {
+    // Добавляем кнопки "Назад" если их нет
+    if (!document.querySelector('.back-link') && !document.querySelector('main').contains(document.querySelector('.back-link'))) {
+        const main = document.querySelector('main');
+        const isAnswersPage = window.location.pathname.includes('answers');
+        const backLink = document.createElement('a');
+        
+        if (isAnswersPage) {
+            // На странице ответов - ссылка на лекцию
+            const lecturePage = window.location.pathname.replace('-answers', '');
+            backLink.href = lecturePage;
+            backLink.textContent = '← Назад к лекции';
+        } else {
+            // На странице лекции - ссылка на главную
+            backLink.href = '../index.html';
+            backLink.textContent = '← Назад к списку лекций';
+        }
+        
+        backLink.className = 'back-link';
+        main.insertBefore(backLink, main.firstChild);
+    }
+    
+    // Добавляем карточки действий если их нет (нижняя кнопка)
+    if (!document.querySelector('.card-actions') && document.querySelector('.lecture-content')) {
+        const lectureContent = document.querySelector('.lecture-content');
+        const isAnswersPage = window.location.pathname.includes('answers');
+        
+        const cardActions = document.createElement('div');
+        cardActions.className = 'card-actions';
+        
+        if (isAnswersPage) {
+            // На странице ответов - ссылка на лекцию
+            const lecturePage = window.location.pathname.replace('-answers', '');
+            cardActions.innerHTML = `
+                <a href="${lecturePage}" class="btn btn-primary">← Назад к лекции</a>
+                <a href="../index.html" class="btn btn-secondary">На главную</a>
+            `;
+        } else {
+            // На странице лекции - ссылка на ответы
+            const answersPage = window.location.pathname.replace('.html', '-answers.html');
+            cardActions.innerHTML = `
+                <a href="${answersPage}" class="btn btn-primary">Ответы на вопросы</a>
+                <a href="../index.html" class="btn btn-secondary">На главную</a>
+            `;
+        }
+        
+        lectureContent.appendChild(cardActions);
+    }
+    
+    // Применяем стили к таблицам
+    document.querySelectorAll('table').forEach(table => {
+        if (!table.hasAttribute('style')) {
+            table.style.width = '100%';
+            table.style.borderCollapse = 'collapse';
+            table.style.margin = '1rem 0';
+        }
+    });
+    
+    // Применяем стили к заголовкам
+    document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
+        if (!header.className && !header.closest('.card')) {
+            header.style.color = 'var(--text-light)';
+        }
+    });
+}
+
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new SimpleSearch();
-});
-
-// Add some interactive effects
-document.addEventListener('DOMContentLoaded', () => {
-    // Add hover effects to cards
-    const cards = document.querySelectorAll('.list-item, .card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-5px)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0)';
-        });
-    });
-
-    // Add loading animation
-    const mainContent = document.querySelector('main');
-    if (mainContent) {
-        mainContent.style.opacity = '0';
-        mainContent.style.transition = 'opacity 0.5s ease';
-        
-        setTimeout(() => {
-            mainContent.style.opacity = '1';
-        }, 100);
-    }
+    applyGlobalStyles();
 });
