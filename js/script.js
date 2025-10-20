@@ -220,8 +220,12 @@ class SimpleSearch {
 
 // Функция для применения стилей ко всем страницам
 function applyGlobalStyles() {
-    // Добавляем кнопки "Назад" если их нет
-    if (!document.querySelector('.back-link') && !document.querySelector('main').contains(document.querySelector('.back-link'))) {
+    // Добавляем кнопки "Назад" только если это не главная страница
+    const isMainPage = window.location.pathname.endsWith('index.html') || 
+                      window.location.pathname.endsWith('/') || 
+                      window.location.pathname === '';
+    
+    if (!isMainPage && !document.querySelector('.back-link') && !document.querySelector('main').contains(document.querySelector('.back-link'))) {
         const main = document.querySelector('main');
         const isAnswersPage = window.location.pathname.includes('answers');
         const backLink = document.createElement('a');
