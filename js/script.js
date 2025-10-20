@@ -40,7 +40,7 @@ class SimpleSearch {
             },
             {
                 title: "Лекция 6: Микроядерная архитектура",
-                content: "Микроядерная архитектура (модель клиент-сервер).",
+                content: "Микроядерная архитектура (модел клиент-сервер).",
                 url: "lectures/lecture-6.html",
                 type: "lecture"
             },
@@ -200,9 +200,111 @@ class SimpleSearch {
     }
 }
 
+// Функция для применения стилей ко всем страницам
+function applyGlobalStyles() {
+    // Добавляем кнопки "Назад" если их нет
+    if (!document.querySelector('.back-link') && !document.querySelector('main').contains(document.querySelector('.back-link'))) {
+        const main = document.querySelector('main');
+        const isAnswersPage = window.location.pathname.includes('answers');
+        const backLink = document.createElement('a');
+        
+        if (isAnswersPage) {
+            // На странице ответов - ссылка на лекцию
+            const lecturePage = window.location.pathname.replace('-answers', '');
+            backLink.href = lecturePage;
+            backLink.textContent = '← Назад к лекции';
+        } else {
+            // На странице лекции - ссылка на главную
+            backLink.href = '../index.html';
+            backLink.textContent = '← Назад к списку лекций';
+        }
+        
+        backLink.className = 'back-link';
+        main.insertBefore(backLink, main.firstChild);
+    }
+    
+    // Преобразуем верхнюю ссылку "Ответы на вопросы" в текстовую
+    styleTopAnswerLinks();
+    
+    // Добавляем карточки действий если их нет (нижняя кнопка)
+    if (!document.querySelector('.card-actions') && document.querySelector('.lecture-content')) {
+        const lectureContent = document.querySelector('.lecture-content');
+        const isAnswersPage = window.location.pathname.includes('answers');
+        
+        const cardActions = document.createElement('div');
+        cardActions.className = 'card-actions';
+        
+        if (isAnswersPage) {
+            // На странице ответов - ссылка на лекцию
+            const lecturePage = window.location.pathname.replace('-answers', '');
+            cardActions.innerHTML = `
+                <a href="${lecturePage}" class="btn btn-primary">← Назад к лекции</a>
+                <a href="../index.html" class="btn btn-secondary">На главную</a>
+            `;
+        } else {
+            // На странице лекции - ссылка на ответы
+            const answersPage = window.location.pathname.replace('.html', '-answers.html');
+            cardActions.innerHTML = `
+                <a href="${answersPage}" class="btn btn-primary">Ответы на вопросы</a>
+                <a href="../index.html" class="btn btn-secondary">На главную</a>
+            `;
+        }
+        
+        lectureContent.appendChild(cardActions);
+    }
+    
+    // Применяем стили к таблицам
+    document.querySelectorAll('table').forEach(table => {
+        if (!table.hasAttribute('style')) {
+            table.style.width = '100%';
+            table.style.borderCollapse = 'collapse';
+            table.style.margin = '1rem 0';
+        }
+    });
+    
+    // Применяем стили к заголовкам
+    document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
+        if (!header.className && !header.closest('.card')) {
+            header.style.color = 'var(--text-light)';
+        }
+    });
+}
+
+// Функция для преобразования верхней ссылки в текстовую
+function styleTopAnswerLinks() {
+    // Находим все ссылки которые ведут на ответы в верхней части страницы
+    const answerLinks = document.querySelectorAll('a[href*="answers"], a[href*="answer"]');
+    
+    answerLinks.forEach(link => {
+        // Если ссылка находится в основном контенте (не в card-actions) и не является кнопкой
+        if (link.closest('.lecture-content') && !link.closest('.card-actions') && !link.classList.contains('btn')) {
+            link.classList.add('answers-top-link');
+            link.classList.remove('btn', 'btn-primary');
+            
+            // Убираем иконки если есть
+            if (link.innerHTML.includes('📝')) {
+                link.textContent = link.textContent.replace('📝', '').trim();
+            }
+        }
+    });
+    
+    // Также ищем по тексту
+    const allLinks = document.querySelectorAll('a:not(.card-actions a)');
+    allLinks.forEach(link => {
+        const linkText = link.textContent.toLowerCase();
+        if ((linkText.includes('ответы') || linkText.includes('ответ')) && 
+            !link.closest('.card-actions') &&
+            link.closest('.lecture-content')) {
+            link.classList.add('answers-top-link');
+            link.classList.remove('btn', 'btn-primary');
+        }
+    });
+}
+
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new SimpleSearch();
+    applyGlobalStyles();
     
     // Add fade-in animation for cards
     const cards = document.querySelectorAll('.card');
@@ -216,189 +318,9 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = 'translateY(0)';
         }, index * 100);
     });
-});
-
-// Функция для применения стилей ко всем страницам
-function applyGlobalStyles() {
-    // Добавляем кнопки "Назад" если их нет
-    if (!document.querySelector('.back-link') && !document.querySelector('main').contains(document.querySelector('.back-link'))) {
-        const main = document.querySelector('main');
-        const isAnswersPage = window.location.pathname.includes('answers');
-        const backLink = document.createElement('a');
-        
-        if (isAnswersPage) {
-            // На странице ответов - ссылка на лекцию
-            const lecturePage = window.location.pathname.replace('-answers', '');
-            backLink.href = lecturePage;
-            backLink.textContent = '← Назад к лекции';
-        } else {
-            // На странице лекции - ссылка на главную
-            backLink.href = '../index.html';
-            backLink.textContent = '← Назад к списку лекций';
-        }
-        
-        backLink.className = 'back-link';
-        main.insertBefore(backLink, main.firstChild);
-    }
-    
-    // Добавляем карточки действий если их нет
-    if (!document.querySelector('.card-actions') && document.querySelector('.lecture-content')) {
-        const lectureContent = document.querySelector('.lecture-content');
-        const isAnswersPage = window.location.pathname.includes('answers');
-        
-        const cardActions = document.createElement('div');
-        cardActions.className = 'card-actions';
-        
-        if (isAnswersPage) {
-            // На странице ответов - ссылка на лекцию
-            const lecturePage = window.location.pathname.replace('-answers', '');
-            cardActions.innerHTML = `
-                <a href="${lecturePage}" class="btn btn-primary">← Назад к лекции</a>
-                <a href="../index.html" class="btn btn-secondary">На главную</a>
-            `;
-        } else {
-            // На странице лекции - ссылка на ответы
-            const answersPage = window.location.pathname.replace('.html', '-answers.html');
-            cardActions.innerHTML = `
-                <a href="${answersPage}" class="btn btn-primary">Ответы на вопросы</a>
-                <a href="../index.html" class="btn btn-secondary">На главную</a>
-            `;
-        }
-        
-        lectureContent.appendChild(cardActions);
-    }
-    
-    // Применяем стили к таблицам
-    document.querySelectorAll('table').forEach(table => {
-        if (!table.hasAttribute('style')) {
-            table.style.width = '100%';
-            table.style.borderCollapse = 'collapse';
-            table.style.margin = '1rem 0';
-        }
-    });
-    
-    // Применяем стили к заголовкам
-    document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
-        if (!header.className && !header.closest('.card')) {
-            header.style.color = 'var(--text-light)';
-        }
-    });
-}
-
-// Вызываем при загрузке
-document.addEventListener('DOMContentLoaded', () => {
-    applyGlobalStyles();
-});
-
-// Функция для применения стилей ко всем страницам
-function applyGlobalStyles() {
-    // Добавляем кнопки "Назад" если их нет
-    if (!document.querySelector('.back-link') && !document.querySelector('main').contains(document.querySelector('.back-link'))) {
-        const main = document.querySelector('main');
-        const isAnswersPage = window.location.pathname.includes('answers');
-        const backLink = document.createElement('a');
-        
-        if (isAnswersPage) {
-            // На странице ответов - ссылка на лекцию
-            const lecturePage = window.location.pathname.replace('-answers', '');
-            backLink.href = lecturePage;
-            backLink.textContent = '← Назад к лекции';
-        } else {
-            // На странице лекции - ссылка на главную
-            backLink.href = '../index.html';
-            backLink.textContent = '← Назад к списку лекций';
-        }
-        
-        backLink.className = 'back-link';
-        main.insertBefore(backLink, main.firstChild);
-    }
-    
-    // Стилизуем существующие ссылки "Ответы на вопросы"
-    styleExistingAnswerLinks();
-    
-    // Добавляем карточки действий если их нет
-    if (!document.querySelector('.card-actions') && document.querySelector('.lecture-content')) {
-        const lectureContent = document.querySelector('.lecture-content');
-        const isAnswersPage = window.location.pathname.includes('answers');
-        
-        const cardActions = document.createElement('div');
-        cardActions.className = 'card-actions';
-        
-        if (isAnswersPage) {
-            // На странице ответов - ссылка на лекцию
-            const lecturePage = window.location.pathname.replace('-answers', '');
-            cardActions.innerHTML = `
-                <a href="${lecturePage}" class="btn btn-primary">← Назад к лекции</a>
-                <a href="../index.html" class="btn btn-secondary">На главную</a>
-            `;
-        } else {
-            // На странице лекции - ссылка на ответы
-            const answersPage = window.location.pathname.replace('.html', '-answers.html');
-            cardActions.innerHTML = `
-                <a href="${answersPage}" class="btn btn-primary">Ответы на вопросы</a>
-                <a href="../index.html" class="btn btn-secondary">На главную</a>
-            `;
-        }
-        
-        lectureContent.appendChild(cardActions);
-    }
-    
-    // Применяем стили к таблицам
-    document.querySelectorAll('table').forEach(table => {
-        if (!table.hasAttribute('style')) {
-            table.style.width = '100%';
-            table.style.borderCollapse = 'collapse';
-            table.style.margin = '1rem 0';
-        }
-    });
-    
-    // Применяем стили к заголовкам
-    document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
-        if (!header.className && !header.closest('.card')) {
-            header.style.color = 'var(--text-light)';
-        }
-    });
-}
-
-// Функция для стилизации существующих ссылок "Ответы на вопросы"
-function styleExistingAnswerLinks() {
-    // Находим все ссылки которые ведут на ответы
-    const answerLinks = document.querySelectorAll('a[href*="answers"], a[href*="answer"]');
-    
-    answerLinks.forEach(link => {
-        // Проверяем, не является ли это уже стилизованной кнопкой
-        if (!link.classList.contains('btn') && !link.closest('.card-actions')) {
-            link.classList.add('btn', 'btn-primary');
-            
-            // Добавляем иконку если её нет
-            if (!link.querySelector('span, .icon')) {
-                link.innerHTML = `📝 ${link.textContent}`;
-            }
-        }
-    });
-    
-    // Также стилизуем ссылки по тексту
-    const allLinks = document.querySelectorAll('a');
-    allLinks.forEach(link => {
-        const linkText = link.textContent.toLowerCase();
-        if ((linkText.includes('ответы') || linkText.includes('ответ')) && 
-            !link.classList.contains('btn') && 
-            !link.closest('.card-actions')) {
-            link.classList.add('btn', 'btn-primary');
-            
-            if (!link.querySelector('span, .icon')) {
-                link.innerHTML = `📝 ${link.textContent}`;
-            }
-        }
-    });
-}
-
-// Вызываем при загрузке
-document.addEventListener('DOMContentLoaded', () => {
-    applyGlobalStyles();
     
     // Дополнительная проверка через небольшую задержку
     setTimeout(() => {
-        styleExistingAnswerLinks();
+        styleTopAnswerLinks();
     }, 100);
 });
