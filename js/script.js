@@ -217,3 +217,75 @@ document.addEventListener('DOMContentLoaded', () => {
         }, index * 100);
     });
 });
+
+// Функция для применения стилей ко всем страницам
+function applyGlobalStyles() {
+    // Добавляем кнопки "Назад" если их нет
+    if (!document.querySelector('.back-link') && !document.querySelector('main').contains(document.querySelector('.back-link'))) {
+        const main = document.querySelector('main');
+        const isAnswersPage = window.location.pathname.includes('answers');
+        const backLink = document.createElement('a');
+        
+        if (isAnswersPage) {
+            // На странице ответов - ссылка на лекцию
+            const lecturePage = window.location.pathname.replace('-answers', '');
+            backLink.href = lecturePage;
+            backLink.textContent = '← Назад к лекции';
+        } else {
+            // На странице лекции - ссылка на главную
+            backLink.href = '../index.html';
+            backLink.textContent = '← Назад к списку лекций';
+        }
+        
+        backLink.className = 'back-link';
+        main.insertBefore(backLink, main.firstChild);
+    }
+    
+    // Добавляем карточки действий если их нет
+    if (!document.querySelector('.card-actions') && document.querySelector('.lecture-content')) {
+        const lectureContent = document.querySelector('.lecture-content');
+        const isAnswersPage = window.location.pathname.includes('answers');
+        
+        const cardActions = document.createElement('div');
+        cardActions.className = 'card-actions';
+        
+        if (isAnswersPage) {
+            // На странице ответов - ссылка на лекцию
+            const lecturePage = window.location.pathname.replace('-answers', '');
+            cardActions.innerHTML = `
+                <a href="${lecturePage}" class="btn btn-primary">← Назад к лекции</a>
+                <a href="../index.html" class="btn btn-secondary">На главную</a>
+            `;
+        } else {
+            // На странице лекции - ссылка на ответы
+            const answersPage = window.location.pathname.replace('.html', '-answers.html');
+            cardActions.innerHTML = `
+                <a href="${answersPage}" class="btn btn-primary">Ответы на вопросы</a>
+                <a href="../index.html" class="btn btn-secondary">На главную</a>
+            `;
+        }
+        
+        lectureContent.appendChild(cardActions);
+    }
+    
+    // Применяем стили к таблицам
+    document.querySelectorAll('table').forEach(table => {
+        if (!table.hasAttribute('style')) {
+            table.style.width = '100%';
+            table.style.borderCollapse = 'collapse';
+            table.style.margin = '1rem 0';
+        }
+    });
+    
+    // Применяем стили к заголовкам
+    document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
+        if (!header.className && !header.closest('.card')) {
+            header.style.color = 'var(--text-light)';
+        }
+    });
+}
+
+// Вызываем при загрузке
+document.addEventListener('DOMContentLoaded', () => {
+    applyGlobalStyles();
+});
