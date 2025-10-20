@@ -1,95 +1,205 @@
-/* Общие стили */
+/* Современный ресет и базовые стили */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --primary: #ff66a3;
+    --primary-dark: #e0558f;
+    --secondary: #ff8ebb;
+    --accent: #ffb6d5;
+    --bg-dark: #1a0a12;
+    --bg-card: #2a0f1a;
+    --bg-card-hover: #3d1829;
+    --text-light: #ffd6e8;
+    --text-muted: #e8b8cf;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --error: #f44336;
+    --gradient: linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%);
+    --gradient-dark: linear-gradient(135deg, #3d1829 0%, #2a0f1a 100%);
+    --shadow: 0 8px 32px rgba(255, 102, 163, 0.15);
+    --shadow-hover: 0 16px 48px rgba(255, 102, 163, 0.25);
+    --border-radius: 20px;
+    --border-radius-sm: 12px;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #e8d7d7;
-    background: linear-gradient(135deg, #2a0f1a 0%, #1a0a12 100%);
+    line-height: 1.7;
+    color: var(--text-light);
+    background: var(--bg-dark);
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* Шапка */
+/* Анимированный фон */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.bg-particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+    opacity: 0.1;
+    animation: float 20s infinite linear;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-100px) rotate(120deg); }
+    66% { transform: translateY(-50px) rotate(240deg); }
+}
+
+/* Современный хедер */
 header {
-    background: linear-gradient(135deg, #3d1829 0%, #2a0f1a 100%);
-    color: #ffd6e8;
+    background: rgba(42, 15, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 102, 163, 0.2);
     padding: 1.5rem 0;
-    box-shadow: 0 4px 20px rgba(190, 104, 147, 0.2);
-    border-bottom: 1px solid #ff66a3;
-}
-
-header h1 {
-    text-align: center;
-    margin-bottom: 1rem;
-    font-weight: 300;
-    letter-spacing: 1px;
-}
-
-nav ul {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-}
-
-nav ul li {
-    margin: 0 1.5rem;
-}
-
-nav ul li a {
-    color: #ffb6d5;
-    text-decoration: none;
-    font-weight: 500;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
     transition: all 0.3s ease;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
 }
 
-nav ul li a:hover {
-    color: #ff66a3;
-    background: rgba(255, 102, 163, 0.1);
-    transform: translateY(-2px);
+header.scrolled {
+    padding: 1rem 0;
+    background: rgba(42, 15, 26, 0.98);
 }
 
-/* Основной контент */
-main {
+.header-content {
     max-width: 1200px;
-    margin: 2rem auto;
+    margin: 0 auto;
     padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-section {
-    margin-bottom: 3rem;
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-h2 {
-    color: #ffb6d5;
-    border-bottom: 2px solid #ff66a3;
-    padding-bottom: 0.7rem;
-    margin-bottom: 2rem;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-}
-
-/* Сетка лекций */
-.lectures-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+/* Современная навигация */
+.nav-menu {
+    display: flex;
+    list-style: none;
     gap: 2rem;
 }
 
-.lecture-card {
-    background: linear-gradient(145deg, #3d1829 0%, #2d1120 100%);
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(190, 104, 147, 0.15);
-    padding: 2rem;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid #4a1e33;
+.nav-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient);
+    transition: left 0.3s ease;
+    z-index: -1;
+    border-radius: 50px;
+}
+
+.nav-link:hover::before {
+    left: 0;
+}
+
+.nav-link:hover {
+    color: var(--bg-dark);
+    transform: translateY(-2px);
+}
+
+/* Главный контент */
+main {
+    max-width: 1200px;
+    margin: 100px auto 2rem;
+    padding: 0 1.5rem;
+}
+
+/* Поисковая система */
+.search-section {
+    margin-bottom: 3rem;
+}
+
+.search-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1.2rem 2rem 1.2rem 3rem;
+    border: 2px solid rgba(255, 102, 163, 0.3);
+    border-radius: 50px;
+    background: rgba(42, 15, 26, 0.8);
+    color: var(--text-light);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 30px rgba(255, 102, 163, 0.3);
+    background: rgba(42, 15, 26, 0.95);
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: 1.2rem;
+}
+
+/* Сетка карточек */
+.lectures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* Современные карточки */
+.lecture-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 102, 163, 0.1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .lecture-card::before {
@@ -98,428 +208,292 @@ h2 {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #ff66a3, #ffb6d5);
+    height: 4px;
+    background: var(--gradient);
+}
+
+.lecture-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 102, 163, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.lecture-card:hover::after {
+    left: 100%;
 }
 
 .lecture-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(255, 102, 163, 0.25);
-    border-color: #ff66a3;
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.card-badge {
+    background: var(--gradient);
+    color: var(--bg-dark);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 .lecture-card h3 {
-    color: #ffd6e8;
+    color: var(--text-light);
     margin-bottom: 1rem;
-    font-weight: 400;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 .lecture-card p {
+    color: var(--text-muted);
     margin-bottom: 1.5rem;
-    color: #e8b8cf;
-    line-height: 1.7;
+    line-height: 1.6;
 }
 
+/* Кнопки нового дизайна */
 .card-actions {
     display: flex;
-    justify-content: space-between;
     gap: 1rem;
 }
 
-/* Кнопки */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%);
-    color: #2a0f1a;
-    padding: 0.7rem 1.5rem;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    padding: 0.8rem 1.5rem;
     border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3);
-}
-
-.btn:hover {
-    background: linear-gradient(135deg, #ff8ebb 0%, #ff66a3 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.4);
-}
-
-.btn-secondary {
-    background: linear-gradient(135deg, #b86b9a 0%, #d48fb8 100%);
-    box-shadow: 0 4px 15px rgba(184, 107, 154, 0.3);
-}
-
-.btn-secondary:hover {
-    background: linear-gradient(135deg, #d48fb8 0%, #b86b9a 100%);
-    box-shadow: 0 6px 20px rgba(184, 107, 154, 0.4);
-}
-
-/* Подвал */
-footer {
-    background: linear-gradient(135deg, #2a0f1a 0%, #1a0a12 100%);
-    color: #ffb6d5;
-    text-align: center;
-    padding: 2rem 0;
-    margin-top: 3rem;
-    border-top: 1px solid #ff66a3;
-}
-
-/* Стили для страниц лекций */
-.lecture-content {
-    background: linear-gradient(145deg, #3d1829 0%, #2d1120 100%);
-    padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(190, 104, 147, 0.15);
-    border: 1px solid #4a1e33;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
     position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    gap: 0.5rem;
 }
 
-.lecture-content::before {
+.btn::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #ff66a3, #ffb6d5, #ff66a3);
-    border-radius: 16px 16px 0 0;
-}
-
-.lecture-title {
-    color: #ffd6e8;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid #ff66a3;
-    padding-bottom: 0.8rem;
-    font-weight: 300;
-}
-
-.lecture-section {
-    margin-bottom: 2.5rem;
-}
-
-.lecture-section h3 {
-    color: #ff8ebb;
-    margin-bottom: 1.2rem;
-    font-weight: 400;
-    border-left: 3px solid #ff66a3;
-    padding-left: 1rem;
-}
-
-.lecture-section p {
-    margin-bottom: 1.2rem;
-    color: #e8b8cf;
-    line-height: 1.7;
-}
-
-.lecture-section ul, .lecture-section ol {
-    margin-left: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.questions-list {
-    list-style: none;
-    margin-left: 0;
-}
-
-.question-item {
-    background: linear-gradient(145deg, #4a1e33 0%, #3a1527 100%);
-    border-left: 4px solid #ff66a3;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    border-radius: 0 12px 12px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.question-item:hover {
-    transform: translateX(5px);
-    box-shadow: 0 6px 20px rgba(255, 102, 163, 0.2);
-}
-
-.question-text {
-    font-weight: 600;
-    margin-bottom: 0.8rem;
-    color: #ffd6e8;
-}
-
-.answer-text {
-    color: #e8b8cf;
-    line-height: 1.6;
-}
-
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    color: #ff8ebb;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-}
-
-.back-link:hover {
-    color: #ff66a3;
-    background: rgba(255, 102, 163, 0.1);
-    text-decoration: none;
-    transform: translateX(-5px);
-}
-
-/* Дополнительные стили для улучшения внешнего вида */
-
-/* Стили для таблиц в ответах на вопросы */
-table {
+    left: -100%;
     width: 100%;
-    border-collapse: collapse;
-    margin: 1.5rem 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    overflow: hidden;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
 }
 
-th, td {
-    border: 1px solid #4a1e33;
-    padding: 14px;
-    text-align: left;
+.btn:hover::before {
+    left: 100%;
 }
 
-th {
-    background: linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%);
-    color: #2a0f1a;
-    font-weight: 600;
+.btn-primary {
+    background: var(--gradient);
+    color: var(--bg-dark);
+    box-shadow: 0 4px 15px rgba(255, 102, 163, 0.3);
 }
 
-tr:nth-child(even) {
-    background-color: rgba(74, 30, 51, 0.3);
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 102, 163, 0.4);
 }
 
-tr:hover {
-    background-color: rgba(255, 102, 163, 0.1);
+.btn-secondary {
+    background: rgba(255, 102, 163, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(255, 102, 163, 0.3);
 }
 
-/* Стили для списков в лекциях */
-.lecture-section ul, .lecture-section ol {
-    margin-left: 2.5rem;
-    margin-bottom: 1.5rem;
+.btn-secondary:hover {
+    background: rgba(255, 102, 163, 0.2);
+    transform: translateY(-2px);
+    border-color: var(--primary);
 }
 
-.lecture-section li {
-    margin-bottom: 0.7rem;
-    line-height: 1.6;
-    color: #e8b8cf;
+/* Анимированные секции */
+.section {
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
 }
 
-/* Стили для подсветки кода */
-code {
-    background-color: rgba(42, 15, 26, 0.8);
-    padding: 3px 8px;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    color: #ff8ebb;
-    border: 1px solid #4a1e33;
-}
-
-pre {
-    background: linear-gradient(145deg, #2a0f1a 0%, #1a0a12 100%);
-    padding: 1.5rem;
-    border-radius: 12px;
-    overflow-x: auto;
-    margin: 1.5rem 0;
-    border: 1px solid #4a1e33;
-    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Анимации */
-@keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(20px);
-    }
-    to { 
-        opacity: 1; 
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
         transform: translateY(0);
     }
 }
 
-.lecture-content {
-    animation: fadeIn 0.6s ease-out;
-}
-
-.lecture-card {
-    animation: fadeIn 0.5s ease-out;
-}
-
-/* Стили для практических работ */
-.requirements-types {
-    display: grid;
-    gap: 1.5rem;
+.section h2 {
+    color: var(--text-light);
+    font-size: 2.5rem;
     margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--text-light) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.req-type {
-    background: linear-gradient(145deg, #4a1e33 0%, #3a1527 100%);
-    padding: 1.5rem;
-    border-radius: 12px;
-    border-left: 4px solid #ff66a3;
+/* Статистика */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
 }
 
-.req-type h5 {
-    color: #ff8ebb;
-    margin-bottom: 0.8rem;
-    font-size: 1.1rem;
-}
-
-.stakeholders-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.5rem 0;
-    background: linear-gradient(145deg, #3d1829 0%, #2d1120 100%);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.stakeholders-table th {
-    background: linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%);
-    color: #2a0f1a;
-    padding: 1rem;
-    text-align: left;
-    font-weight: 600;
-}
-
-.stakeholders-table td {
-    padding: 1rem;
-    border-bottom: 1px solid #4a1e33;
-    color: #e8b8cf;
-}
-
-.stakeholders-table tr:hover {
-    background-color: rgba(255, 102, 163, 0.1);
-}
-
-.srs-document {
-    background: linear-gradient(145deg, #3d1829 0%, #2d1120 100%);
+.stat-card {
+    background: var(--bg-card);
     padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid #4a1e33;
-    margin: 1.5rem 0;
-}
-
-.srs-document h3, .srs-document h4 {
-    color: #ffd6e8;
-    margin-bottom: 1rem;
-}
-
-.srs-document p {
-    margin-bottom: 1rem;
-    color: #e8b8cf;
-}
-
-/* Стили для мобильных устройств */
-@media (max-width: 768px) {
-    .lectures-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .card-actions {
-        flex-direction: column;
-        gap: 0.8rem;
-    }
-    
-    .btn {
-        text-align: center;
-        width: 100%;
-    }
-    
-    table {
-        font-size: 0.9rem;
-    }
-    
-    th, td {
-        padding: 10px;
-    }
-    
-    .lecture-section ul, .lecture-section ol {
-        margin-left: 1.5rem;
-    }
-    
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    
-    nav ul li {
-        margin: 0.3rem 0;
-    }
-    
-    .requirements-types {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Стили для печати */
-@media print {
-    .card-actions, .back-link, nav, footer {
-        display: none;
-    }
-    
-    .lecture-content {
-        box-shadow: none;
-        background: white;
-        color: black;
-    }
-    
-    body {
-        background: white;
-        color: black;
-    }
-}
-
-/* Дополнительные декоративные элементы */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 102, 163, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 182, 213, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(184, 107, 154, 0.05) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* Стили для активных ссылок навигации */
-nav a.active {
-    background: linear-gradient(135deg, rgba(255, 102, 163, 0.3) 0%, rgba(255, 182, 213, 0.2) 100%) !important;
-    color: #ff66a3 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 102, 163, 0.3);
-}
-
-.tooltip-btn {
-    background: linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%);
-    color: #2a0f1a;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
+    border-radius: var(--border-radius);
+    text-align: center;
+    border: 1px solid rgba(255, 102, 163, 0.1);
     transition: all 0.3s ease;
 }
 
-.tooltip-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(255, 102, 163, 0.4);
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: var(--shadow);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Футер */
+footer {
+    background: var(--bg-card);
+    text-align: center;
+    padding: 3rem 0;
+    margin-top: 4rem;
+    border-top: 1px solid rgba(255, 102, 163, 0.2);
+}
+
+/* Модальное окно поиска */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-hover);
+    margin-top: 0.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+}
+
+.search-result-item {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 102, 163, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-result-item:hover {
+    background: var(--bg-card-hover);
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+/* Темная тема (уже есть) */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 102, 163, 0.1);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-menu {
+        gap: 1rem;
+    }
+
+    .lectures-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-actions {
+        flex-direction: column;
+    }
+
+    .section h2 {
+        font-size: 2rem;
+    }
+
+    main {
+        margin-top: 140px;
+    }
+}
+
+/* Анимации загрузки */
+.loading {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.loaded {
+    opacity: 1;
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
 }
