@@ -1,296 +1,338 @@
-// Расширенный скрипт для добавления интерактивности
-document.addEventListener('DOMContentLoaded', function() {
-    // Плавная прокрутка для всех ссылок
-    const links = document.querySelectorAll('a[href^="#"]');
-    
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
+// Современный JavaScript с улучшенной функциональностью
+class ModernWebsite {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.createAnimatedBackground();
+        this.initSmoothScrolling();
+        this.initSearch();
+        this.initScrollEffects();
+        this.initThemeToggle();
+        this.initAnimations();
+        this.initStatistics();
+        this.addLoadingAnimation();
+    }
+
+    // Создание анимированного фона с частицами
+    createAnimatedBackground() {
+        const bgContainer = document.createElement('div');
+        bgContainer.className = 'animated-bg';
+        
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'bg-particle';
             
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+            const size = Math.random() * 100 + 50;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const animationDelay = Math.random() * 20;
             
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${left}%`;
+            particle.style.top = `${top}%`;
+            particle.style.animationDelay = `${animationDelay}s`;
+            
+            bgContainer.appendChild(particle);
+        }
+        
+        document.body.appendChild(bgContainer);
+    }
+
+    // Плавная прокрутка
+    initSmoothScrolling() {
+        const links = document.querySelectorAll('a[href^="#"]');
+        
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Закрываем мобильное меню если открыто
+                    this.closeMobileMenu();
+                }
+            });
+        });
+    }
+
+    // Поиск по контенту
+    initSearch() {
+        const searchInput = document.querySelector('.search-input');
+        const searchResults = document.querySelector('.search-results');
+        
+        if (!searchInput) return;
+        
+        let searchTimeout;
+        
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                this.performSearch(e.target.value);
+            }, 300);
+        });
+        
+        searchInput.addEventListener('focus', () => {
+            if (searchInput.value) {
+                this.performSearch(searchInput.value);
+            }
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.style.display = 'none';
+            }
+        });
+    }
+
+    performSearch(query) {
+        const searchResults = document.querySelector('.search-results');
+        if (!query.trim()) {
+            searchResults.style.display = 'none';
+            return;
+        }
+        
+        const results = this.searchContent(query);
+        this.displaySearchResults(results, searchResults);
+    }
+
+    searchContent(query) {
+        const results = [];
+        const contentElements = document.querySelectorAll('.lecture-card, .lecture-content, .section');
+        const lowerQuery = query.toLowerCase();
+        
+        contentElements.forEach(element => {
+            const text = element.textContent.toLowerCase();
+            if (text.includes(lowerQuery)) {
+                const title = element.querySelector('h2, h3, h4')?.textContent || 'Без названия';
+                const content = element.textContent.substring(0, 150) + '...';
+                const link = element.querySelector('a')?.href || '#';
+                
+                results.push({
+                    title,
+                    content,
+                    link,
+                    element
                 });
             }
         });
-    });
-    
-    // Добавляем возможность выделения текста в лекциях
-    const lectureContent = document.querySelector('.lecture-content');
-    
-    if (lectureContent) {
-        lectureContent.addEventListener('mouseup', function() {
-            const selection = window.getSelection();
-            const selectedText = selection.toString().trim();
-            
-            if (selectedText.length > 0) {
-                // Создаем стилизованный тултип для выделенного текста
-                createSelectionTooltip(selectedText, selection);
-            }
-        });
+        
+        return results.slice(0, 10); // Ограничиваем 10 результатами
     }
-    
-    // Функция создания тултипа для выделенного текста
-    function createSelectionTooltip(text, selection) {
-        // Удаляем предыдущий тултип, если есть
-        const existingTooltip = document.querySelector('.selection-tooltip');
-        if (existingTooltip) {
-            existingTooltip.remove();
-        }
+
+    displaySearchResults(results, container) {
+        container.innerHTML = '';
         
-        const tooltip = document.createElement('div');
-        tooltip.className = 'selection-tooltip';
-        tooltip.innerHTML = `
-            <button class="tooltip-btn copy-btn">📋 Копировать</button>
-            <button class="tooltip-btn highlight-btn">🎨 Выделить</button>
-        `;
-        
-        // Стили для тултипа
-        Object.assign(tooltip.style, {
-            position: 'absolute',
-            background: 'linear-gradient(135deg, #3d1829 0%, #2d1120 100%)',
-            border: '1px solid #ff66a3',
-            borderRadius: '12px',
-            padding: '8px',
-            boxShadow: '0 4px 15px rgba(255, 102, 163, 0.3)',
-            zIndex: '10000',
-            display: 'flex',
-            gap: '8px',
-            animation: 'fadeIn 0.3s ease-out'
-        });
-        
-        const range = selection.getRangeAt(0);
-        const rect = range.getBoundingClientRect();
-        
-        tooltip.style.top = `${rect.top + window.scrollY - 50}px`;
-        tooltip.style.left = `${rect.left + window.scrollX + rect.width / 2 - 100}px`;
-        
-        document.body.appendChild(tooltip);
-        
-        // Обработчики для кнопок тултипа
-        tooltip.querySelector('.copy-btn').addEventListener('click', () => {
-            navigator.clipboard.writeText(text).then(() => {
-                tooltip.innerHTML = '✓ Скопировано!';
-                setTimeout(() => tooltip.remove(), 1500);
-            }).catch(() => {
-                // Fallback для старых браузеров
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                tooltip.innerHTML = '✓ Скопировано!';
-                setTimeout(() => tooltip.remove(), 1500);
-            });
-        });
-        
-        tooltip.querySelector('.highlight-btn').addEventListener('click', () => {
-            const span = document.createElement('span');
-            span.style.background = 'linear-gradient(135deg, rgba(255, 102, 163, 0.3) 0%, rgba(255, 182, 213, 0.2) 100%)';
-            span.style.padding = '2px 4px';
-            span.style.borderRadius = '4px';
-            span.textContent = text;
-            
-            range.deleteContents();
-            range.insertNode(span);
-            tooltip.remove();
-        });
-        
-        // Удаляем тултип при клике вне его
-        setTimeout(() => {
-            document.addEventListener('click', function removeTooltip(e) {
-                if (!tooltip.contains(e.target)) {
-                    tooltip.remove();
-                    document.removeEventListener('click', removeTooltip);
-                }
-            });
-        }, 100);
-    }
-    
-    // Добавляем подсветку текущего раздела при прокрутке
-    const sections = document.querySelectorAll('.lecture-section, section');
-    const navLinks = document.querySelectorAll('nav a');
-    
-    function highlightNavOnScroll() {
-        let currentSection = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 150;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight + 100) {
-                currentSection = sectionId;
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSection}`) {
-                link.classList.add('active');
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', highlightNavOnScroll);
-    
-    // Добавляем кнопку "Наверх" в стиле новой темы
-    const scrollToTopBtn = document.createElement('button');
-    scrollToTopBtn.innerHTML = '↑';
-    scrollToTopBtn.classList.add('scroll-to-top');
-    scrollToTopBtn.style.display = 'none';
-    scrollToTopBtn.style.position = 'fixed';
-    scrollToTopBtn.style.bottom = '30px';
-    scrollToTopBtn.style.right = '30px';
-    scrollToTopBtn.style.zIndex = '1000';
-    scrollToTopBtn.style.background = 'linear-gradient(135deg, #ff66a3 0%, #ff8ebb 100%)';
-    scrollToTopBtn.style.color = '#2a0f1a';
-    scrollToTopBtn.style.border = 'none';
-    scrollToTopBtn.style.borderRadius = '50%';
-    scrollToTopBtn.style.width = '60px';
-    scrollToTopBtn.style.height = '60px';
-    scrollToTopBtn.style.fontSize = '24px';
-    scrollToTopBtn.style.cursor = 'pointer';
-    scrollToTopBtn.style.boxShadow = '0 6px 20px rgba(255, 102, 163, 0.4)';
-    scrollToTopBtn.style.transition = 'all 0.3s ease';
-    scrollToTopBtn.style.fontWeight = 'bold';
-    scrollToTopBtn.style.opacity = '0';
-    
-    // Ховер-эффекты для кнопки
-    scrollToTopBtn.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-3px) scale(1.1)';
-        this.style.boxShadow = '0 8px 25px rgba(255, 102, 163, 0.6)';
-    });
-    
-    scrollToTopBtn.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-        this.style.boxShadow = '0 6px 20px rgba(255, 102, 163, 0.4)';
-    });
-    
-    document.body.appendChild(scrollToTopBtn);
-    
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
-            scrollToTopBtn.style.display = 'block';
-            setTimeout(() => {
-                scrollToTopBtn.style.opacity = '1';
-            }, 10);
+        if (results.length === 0) {
+            const noResults = document.createElement('div');
+            noResults.className = 'search-result-item';
+            noResults.textContent = 'Ничего не найдено';
+            container.appendChild(noResults);
         } else {
-            scrollToTopBtn.style.opacity = '0';
-            setTimeout(() => {
-                if (window.scrollY <= 500) {
-                    scrollToTopBtn.style.display = 'none';
-                }
-            }, 300);
-        }
-    });
-    
-    // Добавляем функциональность для сворачивания/разворачивания разделов
-    const sectionHeaders = document.querySelectorAll('.lecture-section h3, .question-item .question-text');
-    
-    sectionHeaders.forEach(header => {
-        if (!header) return;
-        
-        // Добавляем индикатор сворачивания
-        const indicator = document.createElement('span');
-        indicator.innerHTML = '▼';
-        indicator.style.marginLeft = '10px';
-        indicator.style.transition = 'transform 0.3s ease';
-        indicator.style.display = 'inline-block';
-        indicator.style.color = '#ff8ebb';
-        
-        header.style.cursor = 'pointer';
-        header.style.display = 'flex';
-        header.style.alignItems = 'center';
-        header.style.justifyContent = 'space-between';
-        
-        // Добавляем индикатор в заголовок
-        header.appendChild(indicator);
-        
-        header.addEventListener('click', function() {
-            let content;
-            
-            if (this.classList.contains('question-text')) {
-                content = this.nextElementSibling;
-            } else {
-                content = this.parentNode;
-                let nextElement = this.nextElementSibling;
-                while (nextElement && !nextElement.classList.contains('lecture-section')) {
-                    if (nextElement.tagName === 'P' || nextElement.tagName === 'UL' || nextElement.tagName === 'OL' || nextElement.tagName === 'TABLE') {
-                        content = nextElement;
-                        break;
-                    }
-                    nextElement = nextElement.nextElementSibling;
-                }
-            }
-            
-            if (content && (content.classList.contains('answer-text') ||
-                           content.tagName === 'P' || 
-                           content.tagName === 'UL' || 
-                           content.tagName === 'OL' ||
-                           content.tagName === 'TABLE' ||
-                           content.classList.contains('lecture-section'))) {
+            results.forEach(result => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'search-result-item';
+                resultItem.innerHTML = `
+                    <strong>${result.title}</strong>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">${result.content}</p>
+                `;
                 
-                if (content.style.display === 'none') {
-                    content.style.display = 'block';
-                    indicator.style.transform = 'rotate(0deg)';
-                    // Анимация появления
-                    content.style.animation = 'fadeIn 0.4s ease-out';
-                } else {
-                    content.style.display = 'none';
-                    indicator.style.transform = 'rotate(-90deg)';
-                }
+                resultItem.addEventListener('click', () => {
+                    window.location.href = result.link;
+                });
+                
+                container.appendChild(resultItem);
+            });
+        }
+        
+        container.style.display = 'block';
+    }
+
+    // Эффекты при скролле
+    initScrollEffects() {
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            // Эффект хедера
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Параллакс эффект для частиц
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.bg-particle');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
+            });
+            
+            // Анимация появления элементов
+            this.animateOnScroll();
+        });
+    }
+
+    // Переключение темы
+    initThemeToggle() {
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (!themeToggle) return;
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            themeToggle.innerHTML = isLight ? '🌙' : '☀️';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+        
+        // Восстанавливаем тему
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            themeToggle.innerHTML = '🌙';
+        }
+    }
+
+    // Анимации
+    initAnimations() {
+        this.animateOnScroll();
+        
+        // Анимация карточек при наведении
+        const cards = document.querySelectorAll('.lecture-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    }
+
+    animateOnScroll() {
+        const elements = document.querySelectorAll('.section, .lecture-card, .stat-card');
+        
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+            
+            if (elementTop < window.innerHeight - elementVisible) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
             }
         });
-    });
-    
-    // Добавляем эффекты при наведении на карточки лекций
-    const lectureCards = document.querySelectorAll('.lecture-card');
-    
-    lectureCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px) scale(1.02)';
+    }
+
+    // Анимация статистики
+    initStatistics() {
+        const statNumbers = document.querySelectorAll('.stat-number');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animateCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
         });
         
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-    
-    // Добавляем анимацию для навигационных ссылок
-    navLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
-        });
+        statNumbers.forEach(stat => observer.observe(stat));
+    }
+
+    animateCounter(element) {
+        const target = parseInt(element.textContent);
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
         
-        link.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current).toLocaleString();
+        }, 16);
+    }
+
+    // Анимация загрузки
+    addLoadingAnimation() {
+        document.body.classList.add('loading');
+        
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.remove('loading');
+                document.body.classList.add('loaded');
+            }, 500);
         });
-    });
-    
-    // Добавляем дополнительные стили
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+    }
+
+    // Закрытие мобильного меню
+    closeMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
         }
-        
-        .selection-tooltip {
-            animation: fadeIn 0.3s ease-out !important;
-        }
-    `;
-    document.head.appendChild(style);
+    }
+}
+
+// Инициализация при загрузке DOM
+document.addEventListener('DOMContentLoaded', () => {
+    new ModernWebsite();
 });
+
+// Дополнительные утилиты
+class WebsiteUtils {
+    static debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    static throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        }
+    }
+}
+
+// Service Worker для оффлайн-режима (опционально)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+            });
+    });
+}
