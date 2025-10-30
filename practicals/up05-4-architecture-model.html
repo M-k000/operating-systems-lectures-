@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>УП.05: Разработка модели архитектуры ИС</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">ЛЕКЦИИ ИС312/23</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#os-lectures" class="nav-link">Операционные системы</a></li>
+                    <li><a href="../index.html#mdk" class="nav-link">МДК</a></li>
+                    <li><a href="../index.html#practice" class="nav-link">Учебная практика</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="lecture-content">
+            <h1 class="lecture-title">УП.05: Разработка модели архитектуры ИС на примере "Интернет-магазин"</h1>
+            
+            <div class="lecture-section">
+                <h3>Введение</h3>
+                <p><strong>Цель:</strong> Спроектировать и отобразить графически основные компоненты системы, их взаимодействие и место в общей структуре.</p>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Выбор типа архитектуры</h3>
+                <p>Для веб-приложений, таких как интернет-магазин, наиболее распространена <strong>трехуровневая (трехзвенная) архитектура</strong>. Она обеспечивает модульность, масштабируемость и безопасность.</p>
+                
+                <ul>
+                    <li><strong>Уровень 1 (Presentation Layer):</strong> Клиентская часть (то, что видит пользователь в браузере)</li>
+                    <li><strong>Уровень 2 (Business Logic Layer):</strong> Серверная часть (мозг системы, где выполняются все операции)</li>
+                    <li><strong>Уровень 3 (Data Access Layer):</strong> Уровень данных (где хранится информация)</li>
+                </ul>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Декомпозиция архитектуры на модели</h3>
+                
+                <h4>Модель 1: Контекстная диаграмма (Диаграмма окружения)</h4>
+                <p><strong>Задача:</strong> Показать, с какими внешними системами и субъектами будет взаимодействовать наша ИС.</p>
+                
+                <div class="requirements-types">
+                    <div class="req-type">
+                        <h5>Покупатель</h5>
+                        <p>Взаимодействует с системой через браузер</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Платежный шлюз</h5>
+                        <p>Внешняя система для приема платежей (например, ЮKassa)</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Курьерская служба</h5>
+                        <p>Внешняя система для передачи данных о доставке</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Администратор магазина</h5>
+                        <p>Управляет контентом и заказами через админ-панель</p>
+                    </div>
+                </div>
+
+                <h4>Модель 2: Компонентная диаграмма (Логическая архитектура)</h4>
+                <p><strong>Задача:</strong> Показать основные программные модули (компоненты) системы и связи между ними.</p>
+                
+                <table>
+                    <tr>
+                        <th>Компонент</th>
+                        <th>Описание</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Frontend (Клиентское приложение)</strong></td>
+                        <td>Отвечает за отображение интерфейса (React, Vue.js)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backend (Серверное приложение)</strong></td>
+                        <td>
+                            <ul>
+                                <li>API Gateway - единая точка входа</li>
+                                <li>Модуль аутентификации (Auth)</li>
+                                <li>Модуль каталога (Catalog)</li>
+                                <li>Модуль заказов (Order)</li>
+                                <li>Модуль оплаты (Payment)</li>
+                                <li>Модуль уведомлений (Notification)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Уровень данных (Data Layer)</strong></td>
+                        <td>
+                            <ul>
+                                <li>База данных (PostgreSQL/MySQL)</li>
+                                <li>Кеш (Redis)</li>
+                                <li>Файловое хранилище (S3)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+
+                <h4>Модель 3: Физическая архитектура (Деплоймент-диаграмма)</h4>
+                <p><strong>Задача:</strong> Показать, на каких реальных или виртуальных серверах будут развернуты компоненты системы.</p>
+                
+                <div class="requirements-types">
+                    <div class="req-type">
+                        <h5>Балансировщик нагрузки</h5>
+                        <p>Распределяет трафик между веб-серверами</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Веб-серверы (Nginx)</h5>
+                        <p>Отдают статический контент и проксируют запросы</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Серверы приложений</h5>
+                        <p>Развернута бэкенд-логика в Docker-контейнерах</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Кластер БД + Redis</h5>
+                        <p>Основная база данных с репликацией и сервер кеша</p>
+                    </div>
+                </div>
+
+                <h4>Модель 4: Модель данных (ER-диаграмма)</h4>
+                <p><strong>Задача:</strong> Показать структуру базы данных — сущности, их атрибуты и связи.</p>
+                
+                <table>
+                    <tr>
+                        <th>Сущность</th>
+                        <th>Описание</th>
+                        <th>Ключевые атрибуты</th>
+                    </tr>
+                    <tr>
+                        <td>USERS</td>
+                        <td>Пользователи системы</td>
+                        <td>id, email, password_hash, name</td>
+                    </tr>
+                    <tr>
+                        <td>PRODUCTS</td>
+                        <td>Товары магазина</td>
+                        <td>id, name, description, price, category_id</td>
+                    </tr>
+                    <tr>
+                        <td>CATEGORIES</td>
+                        <td>Категории товаров</td>
+                        <td>id, name</td>
+                    </tr>
+                    <tr>
+                        <td>ORDERS</td>
+                        <td>Заказы покупателей</td>
+                        <td>id, user_id, order_date, status, total_amount</td>
+                    </tr>
+                    <tr>
+                        <td>ORDER_ITEMS</td>
+                        <td>Позиции заказов</td>
+                        <td>id, order_id, product_id, quantity, price</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Ключевые связи между сущностями</h3>
+                <ul>
+                    <li><strong>USERS → ORDERS:</strong> Один пользователь может размещать много заказов</li>
+                    <li><strong>CATEGORIES → PRODUCTS:</strong> Одна категория может содержать много товаров</li>
+                    <li><strong>ORDERS → ORDER_ITEMS:</strong> Один заказ состоит из нескольких позиций</li>
+                    <li><strong>PRODUCTS → ORDER_ITEMS:</strong> Один товар может быть в нескольких позициях заказов</li>
+                </ul>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Как оформить в отчете по УП.05</h3>
+                <ol class="process-steps">
+                    <li>
+                        <h5>Введение</h5>
+                        <p>Обоснование выбранного типа архитектуры (трехуровневая, микросервисная)</p>
+                    </li>
+                    <li>
+                        <h5>Диаграммы</h5>
+                        <p>Представить все 4 модели с подробными пояснениями к каждому компоненту</p>
+                    </li>
+                    <li>
+                        <h5>Связь с требованиями</h5>
+                        <p>Показать, как архитектура удовлетворяет функциональным и нефункциональным требованиям</p>
+                    </li>
+                    <li>
+                        <h5>Вывод</h5>
+                        <p>Краткое резюме, почему предложенная архитектура является оптимальной для проекта</p>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="card-actions">
+                <a href="../index.html#practice" class="btn btn-primary">← Назад к списку практик</a>
+                <a href="../index.html" class="btn btn-secondary">На главную</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Учебные материалы. Мазурова Ксения</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
