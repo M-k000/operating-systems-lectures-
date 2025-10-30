@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>УП.05: Детальная модель архитектуры ИС</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">ЛЕКЦИИ ИС312/23</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#os-lectures" class="nav-link">Операционные системы</a></li>
+                    <li><a href="../index.html#mdk" class="nav-link">МДК</a></li>
+                    <li><a href="../index.html#practice" class="nav-link">Учебная практика</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="lecture-content">
+            <h1 class="lecture-title">УП.05: Детальная модель архитектуры информационной системы для интернет-магазина</h1>
+            
+            <div class="lecture-section">
+                <h3>Введение и цели архитектуры</h3>
+                <p><strong>Цель:</strong> Спроектировать масштабируемую, отказоустойчивую и безопасную архитектуру информационной системы интернет-магазина, которая эффективно поддерживает бизнес-процессы компании.</p>
+                
+                <h4>Ключевые архитектурные требования:</h4>
+                <ul>
+                    <li><strong>Производительность:</strong> Быстрое время отклика (<200 мс) для ключевых операций</li>
+                    <li><strong>Масштабируемость:</strong> Возможность горизонтального масштабирования для пиковых нагрузок</li>
+                    <li><strong>Надежность:</strong> Минимизация времени простоя (целевой показатель доступности 99.9%)</li>
+                    <li><strong>Безопасность:</strong> Защита конфиденциальных данных пользователей и платежной информации</li>
+                    <li><strong>Поддерживаемость:</strong> Модульность системы для удобства разработки и внесения изменений</li>
+                </ul>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Высокоуровневая архитектура (Logical View)</h3>
+                <p>Система будет построена по <strong>многоуровневой (N-tier) архитектуре</strong> с четким разделением ответственности.</p>
+                
+                <div class="requirements-types">
+                    <div class="req-type">
+                        <h5>Клиентский уровень</h5>
+                        <p>Single Page Application (SPA) на React.js</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Уровень представления</h5>
+                        <p>API Gateway (Nginx или AWS API Gateway)</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Бизнес-уровень</h5>
+                        <p>Микросервисная архитектура (Backend Services)</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Уровень данных</h5>
+                        <p>Распределенное хранилище данных</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Детализация компонентов и моделей</h3>
+                
+                <h4>3.1. Клиентский Уровень (Frontend)</h4>
+                <p><strong>Модель:</strong> Single Page Application (SPA) на React.js</p>
+                
+                <table>
+                    <tr>
+                        <th>Компонент</th>
+                        <th>Описание</th>
+                    </tr>
+                    <tr>
+                        <td>ProductCatalog</td>
+                        <td>Компонент для отображения и фильтрации товаров</td>
+                    </tr>
+                    <tr>
+                        <td>ShoppingCart</td>
+                        <td>Управление корзиной покупок</td>
+                    </tr>
+                    <tr>
+                        <td>CheckoutWizard</td>
+                        <td>Процесс оформления заказа</td>
+                    </tr>
+                    <tr>
+                        <td>UserProfile</td>
+                        <td>Личный кабинет пользователя</td>
+                    </tr>
+                </table>
+
+                <h4>3.2. Уровень представления (API Gateway)</h4>
+                <p><strong>Модель:</strong> Единая точка входа на основе Nginx или AWS API Gateway</p>
+                
+                <ul>
+                    <li><strong>Маршрутизация запросов</strong> к соответствующим бэкенд-сервисам</li>
+                    <li><strong>Аутентификация и авторизация</strong> (проверка JWT-токенов)</li>
+                    <li><strong>Кэширование</strong> часто запрашиваемых данных</li>
+                    <li><strong>Rate Limiting</strong> для защиты от DDoS-атак</li>
+                    <li><strong>Логирование</strong> входящих запросов</li>
+                </ul>
+
+                <h4>3.3. Бизнес-уровень (Backend Services - Микросервисная архитектура)</h4>
+                
+                <table>
+                    <tr>
+                        <th>Сервис</th>
+                        <th>Модель данных</th>
+                        <th>Ответственность</th>
+                        <th>Ключевые API</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Сервис Пользователей</strong></td>
+                        <td>User, Profile, Address</td>
+                        <td>Регистрация, аутентификация, управление профилем</td>
+                        <td>POST /auth/login, GET /users/me</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Сервис Каталога</strong></td>
+                        <td>Product, Category, Inventory</td>
+                        <td>Управление товарами, категориями, остатками</td>
+                        <td>GET /products, GET /categories</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Сервис Поиска</strong></td>
+                        <td>Индекс в Elasticsearch</td>
+                        <td>Полнотекстовый поиск, фасетная навигация</td>
+                        <td>GET /search?q=query</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Сервис Корзины</strong></td>
+                        <td>Cart, CartItem</td>
+                        <td>Управление корзиной покупок</td>
+                        <td>POST /cart/items, GET /cart</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Сервис Заказов</strong></td>
+                        <td>Order, OrderItem</td>
+                        <td>Оформление заказа, управление статусами</td>
+                        <td>POST /orders, GET /orders/{id}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Сервис Платежей</strong></td>
+                        <td>Payment, Transaction</td>
+                        <td>Интеграция с платежными шлюзами</td>
+                        <td>POST /payments/process</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Сервис Уведомлений</strong></td>
+                        <td>EmailTemplate, SMS</td>
+                        <td>Отправка email и SMS через очереди</td>
+                        <td>POST /notifications/send</td>
+                    </tr>
+                </table>
+
+                <h4>3.4. Уровень данных (Data Layer)</h4>
+                
+                <div class="methods-grid">
+                    <div class="method-item">
+                        <h5>PostgreSQL</h5>
+                        <p>Основное реляционное хранилище для структурированных данных</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>Elasticsearch</h5>
+                        <p>Специализированное хранилище для поиска и фильтрации</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>Redis</h5>
+                        <p>Кэширование, сессии, корзины, брокер сообщений</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>S3-совместимое хранилище</h5>
+                        <p>Хранение изображений товаров, статических файлов</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Модель данных (Высокоуровневая ER-диаграмма)</h3>
+                
+                <table>
+                    <tr>
+                        <th>Сущность</th>
+                        <th>Ключевые атрибуты</th>
+                        <th>Описание</th>
+                    </tr>
+                    <tr>
+                        <td><strong>User</strong></td>
+                        <td>id, email, password_hash, created_at</td>
+                        <td>Пользователи системы</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Product</strong></td>
+                        <td>id, name, description, price, sku, category_id</td>
+                        <td>Товары магазина</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Order</strong></td>
+                        <td>id, user_id, status, total_amount, created_at</td>
+                        <td>Заказы покупателей</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OrderItem</strong></td>
+                        <td>id, order_id, product_id, quantity, price</td>
+                        <td>Позиции заказов</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Category</strong></td>
+                        <td>id, name, slug, parent_id</td>
+                        <td>Категории товаров</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Модель развертывания (Deployment View)</h3>
+                
+                <div class="requirements-types">
+                    <div class="req-type">
+                        <h5>Контейнеризация</h5>
+                        <p>Все сервисы упакованы в Docker-контейнеры</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Оркестрация</h5>
+                        <p>Kubernetes (k8s) или Docker Swarm для управления контейнерами</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Балансировщик нагрузки</h5>
+                        <p>Nginx Ingress Controller или AWS Application Load Balancer</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>CI/CD</h5>
+                        <p>Автоматизированный пайплайн (GitLab CI/CD) для сборки и развертывания</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Обоснование ключевых архитектурных решений</h3>
+                
+                <div class="methods-grid">
+                    <div class="method-item">
+                        <h5>Микросервисы против Монолита</h5>
+                        <p>Независимое масштабирование и независимые циклы разработки</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>Асинхронная коммуникация</h5>
+                        <p>Брокер сообщений для уведомлений повышает отказоустойчивость</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>CQRS для каталога</h5>
+                        <p>Разделение БД для чтения (Elasticsearch) и записи (PostgreSQL)</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>Кэширование на всех уровнях</h5>
+                        <p>Redis, API Gateway, CDN для снижения нагрузки на бэкенд</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Заключение</h3>
+                <p>Предложенная модель архитектуры представляет собой современное, robust-решение для интернет-магазина. Она построена на принципах микросервисной архитектуры, что обеспечивает высокую степень масштабируемости, отказоустойчивости и поддерживаемости. Четкое разделение на уровни и сервисы позволяет командам разработки работать параллельно и безопасно вносить изменения в отдельные части системы, не затрагивая ее целиком.</p>
+            </div>
+
+            <div class="card-actions">
+                <a href="../index.html#practice" class="btn btn-primary">← Назад к списку практик</a>
+                <a href="../index.html" class="btn btn-secondary">На главную</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Учебные материалы. Мазурова Ксения</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
