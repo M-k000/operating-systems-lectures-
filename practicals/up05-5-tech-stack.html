@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>УП.05: Обоснование выбора средств</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">ЛЕКЦИИ ИС312/23</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#os-lectures" class="nav-link">Операционные системы</a></li>
+                    <li><a href="../index.html#mdk" class="nav-link">МДК</a></li>
+                    <li><a href="../index.html#practice" class="nav-link">Учебная практика</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="lecture-content">
+            <h1 class="lecture-title">УП.05: Обоснование выбора средств проектирования</h1>
+            
+            <div class="lecture-section">
+                <h3>Введение</h3>
+                <p>Обоснование выбора средств (стек технологий) — это критически важная часть технического задания и проектной документации, которая показывает продуманность и жизнеспособность вашего решения.</p>
+                <p><strong>Цель проекта:</strong> Создание надежного, масштабируемого и удобного интернет-магазина.</p>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Ключевые требования к технологическому стеку</h3>
+                <div class="requirements-types">
+                    <div class="req-type">
+                        <h5>Функциональность</h5>
+                        <p>Управление товарами, корзина, оформление заказа, интеграции</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Производительность</h5>
+                        <p>Быстрая загрузка страниц, особенно каталога</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Масштабируемость</h5>
+                        <p>Возможность роста без потери производительности</p>
+                    </div>
+                    <div class="req-type">
+                        <h5>Безопасность</h5>
+                        <p>Защита данных клиентов и платежной информации</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Обоснование выбора технологий</h3>
+                
+                <h4>1. Бэкенд (Server-Side)</h4>
+                <p><strong>Выбор: Python/Django</strong></p>
+                <p><strong>Альтернативы:</strong> Node.js/Express, PHP/Laravel, C#/.NET</p>
+                
+                <div class="methods-grid">
+                    <div class="method-item">
+                        <h5>Скорость разработки</h5>
+                        <p>Django — фреймворк с концепцией "батарейки в комплекте"</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>Безопасность</h5>
+                        <p>Встроенная защита от CSRF, SQL-инъекций, XSS</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>Надежность и структура</h5>
+                        <p>Строгая архитектура MVC, понятная документация</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>Экосистема</h5>
+                        <p>Готовые пакеты: Django REST Framework, django-oscar</p>
+                    </div>
+                </div>
+
+                <h4>2. Фронтенд (Client-Side)</h4>
+                <p><strong>Выбор: React.js</strong></p>
+                <p><strong>Альтернативы:</strong> Vue.js, Angular, Svelte</p>
+                
+                <div class="methods-grid">
+                    <div class="method-item">
+                        <h5>Интерактивность и UX</h5>
+                        <p>Создание SPA без перезагрузки страниц</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>Компонентный подход</h5>
+                        <p>Переиспользуемые компоненты для ускорения разработки</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>Производительность</h5>
+                        <p>Virtual DOM для эффективного обновления интерфейса</p>
+                    </div>
+                    <div class="method-item">
+                        <h5>Сообщество</h5>
+                        <p>Огромное количество библиотек и разработчиков</p>
+                    </div>
+                </div>
+
+                <h4>3. База данных</h4>
+                <p><strong>Выбор: PostgreSQL</strong></p>
+                <p><strong>Альтернативы:</strong> MySQL, MongoDB</p>
+                
+                <ul>
+                    <li><strong>Надежность и соответствие ACID:</strong> Полная поддержка транзакций для финансовых операций</li>
+                    <li><strong>Богатый функционал:</strong> Поддержка JSONB для гибкого хранения данных</li>
+                    <li><strong>Масштабируемость:</strong> Отличная производительность для сложных запросов</li>
+                    <li><strong>Бесплатность:</strong> Open-source решение</li>
+                </ul>
+
+                <h4>4. Кэширование</h4>
+                <p><strong>Выбор: Redis</strong></p>
+                <p><strong>Альтернативы:</strong> Memcached, RabbitMQ</p>
+                
+                <ul>
+                    <li><strong>Скорость:</strong> Данные в оперативной памяти для микросекундного отклика</li>
+                    <li><strong>Сценарии использования:</strong> Кэширование страниц, корзина покупок, очереди задач</li>
+                </ul>
+
+                <h4>5. Поиск</h4>
+                <p><strong>Выбор: Elasticsearch</strong></p>
+                <p><strong>Альтернативы:</strong> Apache Solr, Sphinx</p>
+                
+                <ul>
+                    <li><strong>Полнотекстовый поиск:</strong> Быстрый и релевантный поиск с морфологией</li>
+                    <li><strong>Фильтрация:</strong> Эффективная реализация сложных фильтров</li>
+                    <li><strong>Производительность:</strong> Специализированная система для высоких нагрузок</li>
+                </ul>
+
+                <h4>6. Хостинг и развертывание</h4>
+                <p><strong>Выбор: Docker + AWS / VPS</strong></p>
+                
+                <ul>
+                    <li><strong>Контейнеризация (Docker):</strong> Изолированная среда, идентичная работа на всех стадиях</li>
+                    <li><strong>Облачная платформа:</strong> Гибкость, надежность, легкость масштабирования</li>
+                </ul>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Сводная таблица технологического стека</h3>
+                
+                <table>
+                    <tr>
+                        <th>Компонент системы</th>
+                        <th>Выбранная технология</th>
+                        <th>Альтернативы</th>
+                        <th>Ключевая причина выбора</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Бэкенд-фреймворк</strong></td>
+                        <td>Python / Django</td>
+                        <td>Node.js, Laravel, .NET</td>
+                        <td>Скорость разработки, встроенная безопасность</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Фронтенд-фреймворк</strong></td>
+                        <td>React.js</td>
+                        <td>Vue.js, Angular</td>
+                        <td>Интерактивность, компонентный подход</td>
+                    </tr>
+                    <tr>
+                        <td><strong>База данных</strong></td>
+                        <td>PostgreSQL</td>
+                        <td>MySQL, MongoDB</td>
+                        <td>Надежность (ACID), богатый функционал</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Кэширование / Очереди</strong></td>
+                        <td>Redis</td>
+                        <td>Memcached, RabbitMQ</td>
+                        <td>Скорость (in-memory), универсальность</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Поисковая система</strong></td>
+                        <td>Elasticsearch</td>
+                        <td>Apache Solr, Sphinx</td>
+                        <td>Быстрый поиск с исправлением опечаток</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Контейнеризация</strong></td>
+                        <td>Docker</td>
+                        <td>-</td>
+                        <td>Изоляция, переносимость, упрощение развертывания</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Хостинг / Cloud</strong></td>
+                        <td>AWS / VPS</td>
+                        <td>Google Cloud, Azure</td>
+                        <td>Гибкость, масштабируемость, надежность</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="lecture-section">
+                <h3>Заключение</h3>
+                <p>Предложенный технологический стек представляет собой сбалансированное и современное решение для проектирования интернет-магазина. Он удовлетворяет всем ключевым требованиям: обеспечивает быструю разработку, высокую производительность, безопасность и возможность масштабирования в будущем. Выбор основан на популярности и зрелости технологий, что гарантирует доступ к квалифицированным кадрам и долгосрочную поддержку проекта.</p>
+            </div>
+
+            <div class="card-actions">
+                <a href="../index.html#practice" class="btn btn-primary">← Назад к списку практик</a>
+                <a href="../index.html" class="btn btn-secondary">На главную</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Учебные материалы. Мазурова Ксения</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
