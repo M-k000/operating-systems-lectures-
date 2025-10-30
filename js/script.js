@@ -115,7 +115,37 @@ class SimpleSearch {
             {
                 title: "УП.05 - Сбор исходных данных",
                 content: "Сбор исходных данных для разработки проектной документации на информационную систему",
-                url: "practicals/up05-data-collection.html",
+                url: "practicals/up05-1-data-collection.html",
+                type: "practical"
+            },
+            {
+                title: "УП.05 - Оценка экономической эффективности",
+                content: "Оценка экономической эффективности информационной системы. Расчет затрат, экономии и срока окупаемости.",
+                url: "practicals/up05-2-economic-efficiency.html",
+                type: "practical"
+            },
+            {
+                title: "УП.05 - Разработка проектной документации",
+                content: "Разработка проектной документации на информационную систему в соответствии с требованиями заказчика.",
+                url: "practicals/up05-3-project-documentation.html",
+                type: "practical"
+            },
+            {
+                title: "УП.05 - Разработка модели архитектуры ИС",
+                content: "Разработка модели архитектуры информационной системы на примере интернет-магазина.",
+                url: "practicals/up05-4-architecture-model.html",
+                type: "practical"
+            },
+            {
+                title: "УП.05 - Обоснование выбора средств",
+                content: "Обоснование выбора технологического стека для разработки информационной системы.",
+                url: "practicals/up05-5-tech-stack.html",
+                type: "practical"
+            },
+            {
+                title: "УП.05 - Детальная модель архитектуры ИС",
+                content: "Разработка детальной модели архитектуры информационной системы для интернет-магазина.",
+                url: "practicals/up05-6-architecture-detailed.html",
                 type: "practical"
             }
         ];
@@ -232,7 +262,10 @@ function applyGlobalStyles() {
                       window.location.pathname.endsWith('/') || 
                       window.location.pathname === '';
     
-    if (!isMainPage && !document.querySelector('.back-link') && !document.querySelector('main').contains(document.querySelector('.back-link'))) {
+    // Определяем, является ли страница страницей практики
+    const isPracticalPage = window.location.pathname.includes('practicals');
+    
+    if (!isMainPage && !document.querySelector('.back-link')) {
         const main = document.querySelector('main');
         const isAnswersPage = window.location.pathname.includes('answers');
         const backLink = document.createElement('a');
@@ -242,6 +275,10 @@ function applyGlobalStyles() {
             const lecturePage = window.location.pathname.replace('-answers', '');
             backLink.href = lecturePage;
             backLink.textContent = '← Назад к лекции';
+        } else if (isPracticalPage) {
+            // На странице практики - ссылка на список практик
+            backLink.href = '../index.html#practice';
+            backLink.textContent = '← Назад к списку практик';
         } else {
             // На странице лекции - ссылка на главную
             backLink.href = '../index.html';
@@ -249,7 +286,12 @@ function applyGlobalStyles() {
         }
         
         backLink.className = 'back-link';
-        main.insertBefore(backLink, main.firstChild);
+        
+        if (main.firstChild) {
+            main.insertBefore(backLink, main.firstChild);
+        } else {
+            main.appendChild(backLink);
+        }
     }
     
     // Добавляем карточки действий если их нет (нижняя кнопка)
@@ -265,6 +307,12 @@ function applyGlobalStyles() {
             const lecturePage = window.location.pathname.replace('-answers', '');
             cardActions.innerHTML = `
                 <a href="${lecturePage}" class="btn btn-primary">← Назад к лекции</a>
+                <a href="../index.html" class="btn btn-secondary">На главную</a>
+            `;
+        } else if (isPracticalPage) {
+            // На странице практики - ссылка на список практик
+            cardActions.innerHTML = `
+                <a href="../index.html#practice" class="btn btn-primary">← Назад к списку практик</a>
                 <a href="../index.html" class="btn btn-secondary">На главную</a>
             `;
         } else {
@@ -301,4 +349,3 @@ document.addEventListener('DOMContentLoaded', () => {
     new SimpleSearch();
     applyGlobalStyles();
 });
-
