@@ -1,199 +1,89 @@
+/* Простейший CSS для учебных материалов */
+/* Написан новичком */
+
 body {
-    background: #f5f5f5;
     font-family: Arial, sans-serif;
-    color: #333;
+    background: white;
+    color: black;
+    margin: 0;
+    padding: 20px;
 }
 
-/* Заголовки */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 h1 {
     color: #0066cc;
-    font-size: 24px;
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
 h2 {
-    color: #0099ff;
-    font-size: 20px;
+    color: #0066cc;
+    font-size: 22px;
+    margin-top: 40px;
+    background: #e6f2ff;
+    padding: 10px;
+    border-left: 4px solid #0066cc;
 }
 
 h3 {
     color: #333;
     font-size: 18px;
+    margin-top: 0;
 }
 
-/* Основной текст */
-p {
-    line-height: 1.5;
-    margin-bottom: 15px;
+/* Карточки с предметами */
+.materials-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
 }
 
-/* Списки */
-ul, ol {
-    margin-left: 20px;
-    margin-bottom: 15px;
-}
-
-li {
-    margin-bottom: 5px;
-}
-
-/* Таблицы - простые */
-table {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    width: 100%;
-    margin: 15px 0;
-}
-
-th {
-    background: #e6f2ff;
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-}
-
-td {
-    border: 1px solid #ccc;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
+.subject-card {
     background: #f9f9f9;
-}
-
-/* Ссылки */
-a {
-    color: #0066cc;
-    text-decoration: underline;
-}
-
-a:hover {
-    color: #ff6600;
-}
-
-/* Кнопка "Назад" */
-.back-button {
-    display: inline-block;
-    background: #0066cc;
-    color: white;
-    padding: 8px 15px;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-.back-button:hover {
-    background: #004d99;
-}
-
-/* Карточки */
-.card {
-    background: white;
     border: 1px solid #ddd;
     padding: 15px;
-    margin: 15px 0;
-    border-radius: 5px;
+    width: 300px;
 }
 
-/* Код */
-code {
-    background: #f0f0f0;
-    padding: 2px 5px;
-    border: 1px solid #ddd;
-    font-family: Courier, monospace;
+.lessons {
+    margin-top: 10px;
 }
 
-pre {
-    background: #f0f0f0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    overflow: auto;
+.lessons a {
+    display: block;
+    color: #0066cc;
+    text-decoration: none;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
 }
 
-/* Шаги с номерами */
-.steps {
-    margin-left: 0;
-    padding-left: 0;
+.lessons a:hover {
+    background: #e6f2ff;
+    color: #004d99;
 }
 
-.step {
-    background: white;
-    border-left: 3px solid #0066cc;
-    padding: 10px;
-    margin-bottom: 10px;
-    list-style: none;
-}
-
-.step-number {
-    background: #0066cc;
-    color: white;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    display: inline-block;
+/* Подвал */
+footer {
     text-align: center;
-    margin-right: 10px;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    color: #666;
+    font-size: 14px;
 }
 
-/* Адаптивность - самый простой вариант */
+/* Простая адаптивность */
 @media (max-width: 768px) {
     body {
         padding: 10px;
     }
     
-    h1 {
-        font-size: 20px;
-    }
-    
-    table {
-        font-size: 14px;
-    }
-    
-    .card {
-        padding: 10px;
+    .subject-card {
+        width: 100%;
     }
 }
-
-/* Цветовые акценты */
-.important {
-    background: #fff9e6;
-    border-left: 3px solid #ffcc00;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-.tip {
-    background: #e6ffed;
-    border-left: 3px solid #00cc66;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-/* Простые контейнеры */
-.section {
-    margin-bottom: 30px;
-}
-
-/* Простые отступы */
-.margin-top {
-    margin-top: 20px;
-}
-
-.margin-bottom {
-    margin-bottom: 20px;
-}
-
-/* Простая сетка для карточек */
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.card-item {
-    flex: 1;
-    min-width: 200px;
-    background: white;
-    padding: 15px;
-    border: 1px solid #ddd;
-}
-
