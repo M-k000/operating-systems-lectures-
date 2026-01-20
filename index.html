@@ -3,52 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Учебные материалы</title>
+    <title>Учебные материалы ИС312/23</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <h1>Учебные материалы по проектированию</h1>
-        <p>Мазурова Ксения</p>
+        <h1>Учебные материалы</h1>
+        <p>Группа ИС312/23. Мазурова Ксения</p>
     </header>
 
     <main>
-        <section class="materials-section">
-            <h2>Практические работы</h2>
+        <!-- Первое полугодие -->
+        <section class="semester-section">
+            <h2 class="semester-title">🎓 Первое полугодие</h2>
             
-            <div class="materials-list">
-                <!-- УП.05.4 -->
-                <div class="material-card">
-                    <h3>УП.05: Модель архитектуры ИС</h3>
-                    <p>Разработка модели архитектуры информационной системы на примере интернет-магазина.</p>
-                    <a href="practicals/up05-4-architecture-model.html" class="material-button">Открыть</a>
+            <div class="materials-grid">
+                <!-- Лекции по ОС -->
+                <div class="subject-card">
+                    <h3>Операционные системы</h3>
+                    <div class="lessons">
+                        <a href="first-semester/lectures/lecture-2.html">Лекция 2: Файловая система</a>
+                        <a href="first-semester/lectures/lecture-3.html">Лекция 3: Языки взаимодействия с ОС</a>
+                        <a href="first-semester/lectures/lecture-4.html">Лекция 4: Структура ОС</a>
+                        <a href="first-semester/lectures/lecture-5.html">Лекция 5: Операционное окружение</a>
+                        <a href="first-semester/lectures/lecture-6.html">Лекция 6: Микроядерная архитектура</a>
+                        <a href="first-semester/lectures/lecture-10.html">Лекция 10: Понятие прерывания</a>
+                    </div>
                 </div>
 
-                <!-- УП.05.5 -->
-                <div class="material-card">
-                    <h3>УП.05: Обоснование выбора средств</h3>
-                    <p>Обоснование выбора технологического стека для разработки информационной системы.</p>
-                    <a href="practicals/up05-5-tech-stack.html" class="material-button">Открыть</a>
+                <!-- МДК -->
+                <div class="subject-card">
+                    <h3>МДК 05.01</h3>
+                    <div class="lessons">
+                        <a href="first-semester/mdk/mdk05.html">Проектирование и дизайн ИС</a>
+                    </div>
                 </div>
 
-                <!-- УП.05.6 -->
-                <div class="material-card">
-                    <h3>УП.05: Детальная модель архитектуры ИС</h3>
-                    <p>Разработка детальной модели архитектуры информационной системы для интернет-магазина.</p>
-                    <a href="practicals/up05-6-architecture-detailed.html" class="material-button">Открыть</a>
+                <!-- Учебная практика -->
+                <div class="subject-card">
+                    <h3>Учебная практика (УП.05)</h3>
+                    <div class="lessons">
+                        <a href="first-semester/practicals/up05-1.html">Сбор исходных данных</a>
+                        <a href="first-semester/practicals/up05-2.html">Оценка экономической эффективности</a>
+                        <a href="first-semester/practicals/up05-3.html">Разработка проектной документации</a>
+                        <a href="first-semester/practicals/up05-4.html">Модель архитектуры ИС</a>
+                        <a href="first-semester/practicals/up05-5.html">Обоснование выбора средств</a>
+                        <a href="first-semester/practicals/up05-6.html">Детальная модель архитектуры</a>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Новые лекции по проектированию -->
-                <div class="material-card">
-                    <h3>Лекция 1: Основы проектирования</h3>
-                    <p>Введение в проектирование информационных систем. Основные понятия и принципы.</p>
-                    <a href="projection/lecture1.html" class="material-button">Открыть</a>
-                </div>
-
-                <div class="material-card">
-                    <h3>Лекция 2: Моделирование процессов</h3>
-                    <p>Методы и инструменты моделирования бизнес-процессов информационных систем.</p>
-                    <a href="projection/lecture2.html" class="material-button">Открыть</a>
+        <!-- Второе полугодие -->
+        <section class="semester-section">
+            <h2 class="semester-title">📚 Второе полугодие</h2>
+            
+            <div class="materials-grid">
+                <!-- Проектирование и дизайн ИС -->
+                <div class="subject-card">
+                    <h3>Проектирование и дизайн ИС</h3>
+                    <div class="lessons">
+                        <a href="second-semester/projection/lecture1.html">Лекция 1: Основы проектирования</a>
+                        <a href="second-semester/projection/lecture2.html">Лекция 2: Моделирование процессов</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -57,7 +74,5 @@
     <footer>
         <p>© 2025 Учебные материалы. Мазурова Ксения</p>
     </footer>
-
-    <script src="js/script.js"></script>
 </body>
 </html>
